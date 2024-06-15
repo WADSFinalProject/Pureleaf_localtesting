@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('/src/images/bg.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #f0f0f0;
+}
+
+.container {
+  position: relative;
+}
+
+.sidebar-button {
+  position: absolute;
+  top: 41px;
+  left: 70px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.sidebar-button img {
+  display: block;
+  width: 35px;
+  height: 30px;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-bottom: -45px;
+  margin-left: 60px;
+}
+
+.sidebar-button:focus {
+  outline: none;
+}

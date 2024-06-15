@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import './styles/style.css';
+import '../../styles/authentication_styles/style.css';
 import { FcGoogle } from 'react-icons/fc';
 import { PiMicrosoftOutlookLogoFill } from "react-icons/pi";
 import { Link, useNavigate } from 'react-router-dom';

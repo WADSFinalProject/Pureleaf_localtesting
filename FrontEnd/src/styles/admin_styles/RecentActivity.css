@@ -1,0 +1,55 @@
+
+.recent-activity {
+  padding: 1em;
+  background-color: #f9f9f9;
+}
+
+.activity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.graph-section {
+  flex: 1;
+  min-width: 300px; 
+}
+
+.selection-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  min-width: 300px; 
+}
+
+.time-period {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.time-option {
+  display: flex;
+  flex-direction: column;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.time-buttons {
+  display: flex;
+  gap: 0.5em;
+}
+
+@media (min-width: 768px) {
+  .activity-content {
+    flex-direction: row;
+    justify-content: space-between; 
+  }
+  
+  .selection-section {
+    flex: 1;
+  }
+}
+

@@ -1,7 +1,7 @@
 // ForgotPass_Web.jsx
 
 import React, { useEffect, useRef } from 'react';
-import './styles/style.css';
+import '../../styles/authentication_styles/style.css';
 import { Link } from 'react-router-dom';
 import logo from '/src/images/authentication/logo.png';
 

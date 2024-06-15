@@ -1,6 +1,6 @@
 // Register_Web.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import './styles/style.css';
+import '../../styles/authentication_styles/style.css';
 import { FcGoogle } from 'react-icons/fc';
 import { PiMicrosoftOutlookLogoFill } from "react-icons/pi";
 import { Link } from 'react-router-dom';
