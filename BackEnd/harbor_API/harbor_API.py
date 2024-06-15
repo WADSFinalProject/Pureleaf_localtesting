@@ -23,7 +23,8 @@ def get_new_connection():
             host="127.0.0.1",
             user="root",
             passwd="*neoSQL01",
-            database="central_database"
+            database="central_database",
+            auth_plugin='mysql_native_password'
         )
         print("MySQL Database connection successful")
         return connection
@@ -173,16 +174,34 @@ def update_shipment_status(harbor_id: int, shipment_id: int, status: int):
         raise HTTPException(status_code=500, detail="Database connection failed")
     cursor = conn.cursor()
     try:
+        # Update the harbor_checkpoint table
         cursor.execute("UPDATE harbor_checkpoint SET transport_status = %s WHERE harbor_ID = %s AND checkpoint_ID = %s", (status, harbor_id, shipment_id))
         conn.commit()
         if cursor.rowcount == 0:
             raise HTTPException(status_code=404, detail="Shipment not found or status unchanged")
-        return {"message": "Shipment status updated successfully"}
+        
+        # Assuming you can retrieve the batch_ID from the shipment_id
+        cursor.execute("SELECT batch_ID FROM harbor_checkpoint WHERE harbor_ID = %s AND checkpoint_ID = %s", (harbor_id, shipment_id))
+        result = cursor.fetchone()
+        if not result:
+            raise HTTPException(status_code=404, detail="Batch ID not found for the given shipment")
+        
+        batch_id = result[0]
+        
+        # Update the central_database.batch_information table
+        cursor.execute("UPDATE central_database.batch_information SET status = %s WHERE batch_ID = %s", (status, batch_id))
+        conn.commit()
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Batch information not found or status unchanged")
+        
+        return {"message": "Shipment and batch status updated successfully"}
     except Error as e:
         print(f"Database error: {e}")
         raise HTTPException(status_code=500, detail=f"Database update failed: {e}")
     finally:
         cursor.close()
+        conn.close()
+
 
 # Latest shipment
 @app.get("/shipments/{harbor_ID}/latest", response_model=HarborCheckpoint)
