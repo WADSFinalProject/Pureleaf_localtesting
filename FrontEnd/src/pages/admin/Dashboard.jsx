@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import '../../styles/admin_styles/Dashboard.css';
 import Sidebar from './Sidebar';
 import SidebarIcon from '../../images/admin/sidebar-button.png'; 
@@ -39,7 +40,6 @@ const ShipmentBox = ({ batchId, dryWeight, wetWeight, powderedWeight, shipmentId
   );
 };
 
-
 const HistoryBox = ({ batchId, dryWeight, wetWeight, powderedWeight, shipmentId, status, dateReceived }) => {
   return (
     <div className="history-box">
@@ -72,7 +72,6 @@ const HistoryBox = ({ batchId, dryWeight, wetWeight, powderedWeight, shipmentId,
     </div>
   );
 };
-
 
 const Header = ({ username, toggleSidebar }) => {
   const currentDate = new Date().toLocaleDateString('en-US', {
@@ -183,6 +182,7 @@ const Dashboard = () => {
   ]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [batches, setBatches] = useState([]);
+  const [username, setUsername] = useState('Insert Name'); // Default username
 
   useEffect(() => {
     const fetchBatches = async () => {
@@ -194,7 +194,22 @@ const Dashboard = () => {
       }
     };
 
+    const fetchUser = async () => {
+      const userId = Cookies.get('user_id'); // Get the user ID from cookies
+      if (!userId) {
+        console.error('User ID not found in cookies');
+        return;
+      }
+      try {
+        const response = await axios.get(`http://localhost:8000/user/${userId}`);
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+
     fetchBatches();
+    fetchUser();
   }, []);
 
   const toggleSidebar = () => {
@@ -229,7 +244,7 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <Sidebar isOpen={isSidebarOpen} toggleMenu={toggleSidebar} navigateTo={() => {}} />
       <div className={`left-container ${isSidebarOpen ? 'sidebar-open' : ''}`}>
-        <Header username="Insert Name" toggleSidebar={toggleSidebar} />
+        <Header username={username} toggleSidebar={toggleSidebar} />
         <div className="shipments">
           <h2>Shipments</h2>
           <div className="shipment-boxes">

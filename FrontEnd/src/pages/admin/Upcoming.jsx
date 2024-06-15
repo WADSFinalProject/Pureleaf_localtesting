@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import '../../styles/admin_styles/Upcoming.css';
 import Sidebar from './Sidebar';
 import SidebarIcon from '../../images/admin/sidebar-button.png';
 import searchIcon from '../../images/admin/search-icon.png';
 import filterIcon from '../../images/admin/filter-icon.png';
-import mapPlaceholder from '../../images/admin/map-placeholder.png';
 
-const ShipmentBox = ({ batchId, weight, shipmentId, status }) => {
+const ShipmentBox = ({ batchId, dryWeight, wetWeight, powderedWeight, shipmentId, status }) => {
   return (
     <div className="shipment-box">
       <div className="shipment-box-header">{batchId}</div>
       <div className="shipment-box-body">
-        <div>Weight: {weight}</div>
+        <div>Dry Weight: {dryWeight || 'N/A'}</div>
+        <div>Wet Weight: {wetWeight || 'N/A'}</div>
+        <div>Powdered Weight: {powderedWeight || 'N/A'}</div>
         <div>Shipment ID: {shipmentId}</div>
         <div className="status-container">
           <span className="status-text">Status: </span>
@@ -24,6 +26,10 @@ const ShipmentBox = ({ batchId, weight, shipmentId, status }) => {
             <div className={`progress-bar-circle ${status >= 3 ? 'active' : ''}`}></div>
             <div className="progress-bar-line"></div>
             <div className={`progress-bar-circle ${status >= 4 ? 'active' : ''}`}></div>
+            <div className="progress-bar-line"></div>
+            <div className={`progress-bar-circle ${status >= 5 ? 'active' : ''}`}></div>
+            <div className="progress-bar-line"></div>
+            <div className={`progress-bar-circle ${status >= 6 ? 'active' : ''}`}></div>
           </div>
         </div>
       </div>
@@ -132,8 +138,8 @@ const Header = ({ username, toggleSidebar }) => {
         <img src={SidebarIcon} alt="Sidebar" />
       </button>
       <div className="header-left">
-      <h1>Upcoming</h1>
-        <p> Upcoming Shipment of {currentDate}</p>
+        <h1>Upcoming</h1>
+        <p>Upcoming Shipment of {currentDate}</p>
       </div>
       <div className="header-right">
         <form onSubmit={handleSearchSubmit}>
@@ -161,10 +167,25 @@ const Header = ({ username, toggleSidebar }) => {
 
 const Upcoming = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [batches, setBatches] = useState([]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  useEffect(() => {
+    const fetchBatches = async () => {
+      try {
+        const response = await axios.get('http://localhost:8001/batches/');
+        const filteredBatches = response.data.filter(batch => batch.status === 1 || batch.status === 4 || batch.status === 5);
+        setBatches(filteredBatches);
+      } catch (error) {
+        console.error('Error fetching batches:', error);
+      }
+    };
+
+    fetchBatches();
+  }, []);
 
   return (
     <div className="dashboard-container">
@@ -174,30 +195,21 @@ const Upcoming = () => {
         <div className="shipments">
           <h2>Shipments</h2>
           <div className="shipment-boxes">
-            <ShipmentBox batchId="Batch ID" weight="20kg" shipmentId="12345" status={2} />
-            <ShipmentBox batchId="Batch ID" weight="25kg" shipmentId="67890" status={3} />
-            <ShipmentBox batchId="Batch ID" weight="30kg" shipmentId="54321" status={4} />
-            <ShipmentBox batchId="Batch ID" weight="20kg" shipmentId="12345" status={2} />
-            <ShipmentBox batchId="Batch ID" weight="25kg" shipmentId="67890" status={3} />
-            <ShipmentBox batchId="Batch ID" weight="30kg" shipmentId="54321" status={4} />
-            <ShipmentBox batchId="Batch ID" weight="20kg" shipmentId="12345" status={2} />
-            <ShipmentBox batchId="Batch ID" weight="25kg" shipmentId="67890" status={3} />
+            {batches.map(batch => (
+              <ShipmentBox
+                key={batch.batch_ID}
+                batchId={batch.batch_ID}
+                dryWeight={batch.dry_leaves?.dry_weight}
+                wetWeight={batch.wet_leaves?.wet_weight}
+                powderedWeight={batch.powdered_leaves?.powdered_weight}
+                shipmentId={batch.batch_ID}
+                status={batch.status}
+              />
+            ))}
           </div>
         </div>
         <div className="recent-activity-container">
           <RecentActivity />
-          <div className="map-location">
-            <h2>Map Location</h2>
-            <div className="map-image">
-              <img src={mapPlaceholder} alt="Map placeholder" />
-            </div>
-            <div className="shipment-info">
-              <p>Number: #XXX-XXXXX</p>
-              <p>Status: In transit</p>
-              <p>Current location: Xxxx, Xxxxxx</p>
-              <a href="#">View more</a>
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SidebarIcon from '../../images/admin/sidebar-button.png';
 import FlippedSidebarIcon from '../../images/admin/flipped-sidebar-button.png';
 import DashboardLogo from '../../images/admin/dashboard-logo.png';
@@ -9,12 +9,34 @@ import OngoingLogo from '../../images/admin/ongoing-logo.png';
 import CompanyLogo from '../../images/admin/another-logo-sidebar.png';
 import ProfilePic from '../../images/admin/profile-pic.png';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import '../../styles/admin_styles/Sidebar.css';
 
 function Sidebar({ isOpen, toggleMenu }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeItem, setActiveItem] = useState(location.pathname.substr(1));
+  const [userData, setUserData] = useState(null); // State to store user data
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userId = Cookies.get('user_id'); // Get the user ID from cookies
+      if (!userId) {
+        console.error('User ID not found in cookies');
+        return;
+      }
+      try {
+        const response = await axios.get(`http://localhost:8000/user/${userId}`);
+        console.log('User data:', response.data); // Log the response data
+        setUserData(response.data); // Store user data in state
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleNavigation = (page) => {
     toggleMenu();
@@ -37,11 +59,13 @@ function Sidebar({ isOpen, toggleMenu }) {
         <div className="company-logo">
           <img src={CompanyLogo} alt="Company Logo" />
         </div>
-        <div className="profile-section">
-          <img src={ProfilePic} alt="Profile" className="profile-pic" />
-          <h2>Full Name</h2>
-          <p>username@example.com</p>
-        </div>
+        {userData && (
+          <div className="profile-section">
+            <img src={ProfilePic} alt="Profile" className="profile-pic" />
+            <h2>{userData.username || userData.name}</h2> 
+            <p>{userData.email}</p> 
+          </div>
+        )}
         <div className={`sidebar-item ${activeItem === '' ? 'active' : ''}`} onClick={() => handleNavigation('')}>
           <div className="sidebar-item-content">
             <img src={DashboardLogo} alt="Dashboard" className="dashboard-logo sidebar-logo" />
@@ -79,5 +103,3 @@ function Sidebar({ isOpen, toggleMenu }) {
 }
 
 export default Sidebar;
-
-

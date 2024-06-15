@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../../styles/admin_styles/History.css'; 
 import Sidebar from './Sidebar';
 import SidebarIcon from '../../images/admin/sidebar-button.png'; 
@@ -7,13 +8,15 @@ import filterIcon from '../../images/admin/filter-icon.png';
 import notificationIcon from '../../images/admin/notification-icon.png'; 
 import RecentActivity from './RecentActivity';
 
-const HistoryBox = ({ batchId, weight, shipmentId, status, dateReceived }) => {
+const HistoryBox = ({ batchId, dryWeight, wetWeight, powderedWeight, shipmentId, status, dateReceived }) => {
   return (
     <div className="history-box">
       <div className="history-box-header">{batchId}</div>
       <div className="history-box-body">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div>Weight: {weight}</div>
+          <div>Dry Weight: {dryWeight || 'N/A'}</div>
+          <div>Wet Weight: {wetWeight || 'N/A'}</div>
+          <div>Powdered Weight: {powderedWeight || 'N/A'}</div>
           <div className="date-received">Date received: {dateReceived}</div>
         </div>
         <div>Shipment ID: {shipmentId}</div>
@@ -27,6 +30,10 @@ const HistoryBox = ({ batchId, weight, shipmentId, status, dateReceived }) => {
             <div className={`progress-bar-circle ${status >= 3 ? 'active' : ''}`}></div>
             <div className="progress-bar-line"></div>
             <div className={`progress-bar-circle ${status >= 4 ? 'active' : ''}`}></div>
+            <div className="progress-bar-line"></div>
+            <div className={`progress-bar-circle ${status >= 5 ? 'active' : ''}`}></div>
+            <div className="progress-bar-line"></div>
+            <div className={`progress-bar-circle ${status >= 6 ? 'active' : ''}`}></div>
           </div>
         </div>
       </div>
@@ -96,10 +103,25 @@ const Header = ({ username, toggleSidebar }) => {
 
 const History = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [batches, setBatches] = useState([]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  useEffect(() => {
+    const fetchBatches = async () => {
+      try {
+        const response = await axios.get('http://localhost:8001/batches/');
+        const filteredBatches = response.data.filter(batch => batch.status === 3 || batch.status === 6);
+        setBatches(filteredBatches);
+      } catch (error) {
+        console.error('Error fetching batches:', error);
+      }
+    };
+
+    fetchBatches();
+  }, []);
 
   return (
     <div className="history-container">
@@ -112,15 +134,18 @@ const History = () => {
             Filter
           </button>
           <div className="history-boxes">
-            <HistoryBox batchId="Batch ID" weight="20kg" shipmentId="12345" status={2} dateReceived="01/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="25kg" shipmentId="67890" status={3} dateReceived="02/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="30kg" shipmentId="54321" status={4} dateReceived="03/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="20kg" shipmentId="12345" status={2} dateReceived="01/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="25kg" shipmentId="67890" status={3} dateReceived="02/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="30kg" shipmentId="54321" status={4} dateReceived="03/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="20kg" shipmentId="12345" status={2} dateReceived="01/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="25kg" shipmentId="67890" status={3} dateReceived="02/01/2024" />
-            <HistoryBox batchId="Batch ID" weight="30kg" shipmentId="54321" status={4} dateReceived="03/01/2024" />
+            {batches.map(batch => (
+              <HistoryBox
+                key={batch.batch_ID}
+                batchId={batch.batch_ID}
+                dryWeight={batch.dry_leaves?.dry_weight}
+                wetWeight={batch.wet_leaves?.wet_weight}
+                powderedWeight={batch.powdered_leaves?.powdered_weight}
+                shipmentId={batch.batch_ID}
+                status={batch.status}
+                dateReceived={batch.batch_date}
+              />
+            ))}
           </div>
         </div>
       </div>

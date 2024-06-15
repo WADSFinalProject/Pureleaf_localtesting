@@ -112,3 +112,28 @@ async def login(email: str = Body(...), password: str = Body(...)):
             raise HTTPException(status_code=500, detail="Failed to connect to the database")
     else:
         raise HTTPException(status_code=401, detail="Authentication failed")
+    
+
+# Get user information
+
+# Get user information
+@app.get("/user/{user_id}")
+def get_user_info(user_id: str):
+    connection = create_mysql_connection()
+    if connection.is_connected():
+        try:
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute("SELECT user_id, username, email, user_type_id FROM user_account WHERE user_id = %s", (user_id,))
+            user_info = cursor.fetchone()
+            if user_info:
+                return user_info
+            else:
+                raise HTTPException(status_code=404, detail="User not found")
+        except Error as e:
+            raise HTTPException(status_code=500, detail=f"Database query failed: {e}")
+        finally:
+            if connection.is_connected():
+                cursor.close()
+                connection.close()
+    else:
+        raise HTTPException(status_code=500, detail="Failed to connect to the database")

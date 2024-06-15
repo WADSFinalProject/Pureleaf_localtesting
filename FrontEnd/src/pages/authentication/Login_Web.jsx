@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { PiMicrosoftOutlookLogoFill } from "react-icons/pi";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import logo from '/src/images/authentication/logo.png';
 import { AuthContext } from '../../AuthContext';
 
@@ -13,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const imageContainerRef = useRef(null);
   const navigate = useNavigate();
-  const { setIsAuthenticated, setUserType } = useContext(AuthContext);
+  const { setIsAuthenticated, setUserType, setUserData } = useContext(AuthContext);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -34,9 +35,15 @@ const Login = () => {
         }
       });
       console.log('Login successful', response.data);
-      const { user_type } = response.data;
+      const { uid, user_type } = response.data;
+      Cookies.set('user_id', uid); // Store user ID in a cookie
       setIsAuthenticated(true);
       setUserType(user_type);
+
+      // Fetch user data
+      const userResponse = await axios.get(`http://localhost:8000/user/${uid}`);
+      setUserData(userResponse.data); // Store user data in context
+
       navigate('/');
     } catch (error) {
       console.error('Login failed', error);

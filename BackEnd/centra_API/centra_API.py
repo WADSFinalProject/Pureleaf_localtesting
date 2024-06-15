@@ -15,7 +15,8 @@ connect = mysql.connector.connect(
     host='127.0.0.1',
     user='root',
     password='*neoSQL01',
-    database='central_database'
+    database='central_database',
+    auth_plugin='mysql_native_password'
 )
 
 app = FastAPI()
