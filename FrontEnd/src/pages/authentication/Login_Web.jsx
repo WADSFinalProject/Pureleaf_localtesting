@@ -44,7 +44,12 @@ const Login = () => {
       const userResponse = await axios.get(`http://localhost:8000/user/${uid}`);
       setUserData(userResponse.data); // Store user data in context
 
-      navigate('/');
+      // Store session data in sessionStorage
+      sessionStorage.setItem('isAuthenticated', JSON.stringify(true));
+      sessionStorage.setItem('userType', JSON.stringify(user_type));
+      sessionStorage.setItem('userData', JSON.stringify(userResponse.data));
+
+      navigate('/dashboard'); // Redirect to /dashboard after successful login
     } catch (error) {
       console.error('Login failed', error);
       setError('Login failed: ' + (error.response?.data?.detail || error.message));
