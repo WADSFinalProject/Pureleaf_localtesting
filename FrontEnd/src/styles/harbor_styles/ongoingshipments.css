@@ -1,0 +1,233 @@
+body {
+    background-color: var(--glow);
+  }
+
+.mainBackgroundRect {
+    width: 100%;
+    height: 78px;
+    position: absolute;
+    margin: 0 !important;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--ash);
+    z-index: 1;
+  }
+  .subBackgroundRect {
+    align-self: stretch;
+    height: 132px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #848d4c;
+  }
+  .mainOngoingShipment {
+    width: 100%;
+    position: relative;
+    background-color: var(--glow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-46xl) var(--padding-16xl) var(--padding-7xs);
+    box-sizing: border-box;
+    gap: var(--gap-9xl);
+    line-height: normal;
+    letter-spacing: normal;
+  }
+
+
+/*ongoing header */
+
+  .osh_h2,
+.osh_ongoingShipment {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-family: inherit;
+}
+.osh_h2 {
+  font-weight: 400;
+  display: inline-block;
+  min-width: 23px;
+}
+.osh_ongoingShipment {
+  font-weight: 600;
+}
+.osh_ongoingShipmentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+  font-size: var(--font-size-xl);
+}
+.osh_frameChild,
+.osh_frameParent,
+.osh_parent {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+}
+.osh_parent {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.osh_frameChild,
+.osh_frameParent {
+  justify-content: flex-start;
+  font-family: var(--font-inter);
+}
+.osh_frameChild {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background-color: var(--sand);
+  height: 43px;
+  border-radius: var(--br-11xl);
+  flex-direction: row;
+  padding: var(--padding-xs) var(--padding-15xl);
+  box-sizing: border-box;
+  font-weight: 200;
+  font-size: var(--font-size-base);
+  color: var(--ash);
+  min-width: 192px;
+}
+.osh_frameParent {
+  flex-direction: column;
+  padding: 0 0 var(--padding-8xs);
+  gap: var(--gap-3xl);
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+}
+.osh_backButton {
+  text-decoration: none;
+}
+
+/* container */
+
+.osd_frameChild {
+    width: 320px;
+    height: 132px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: none;
+    z-index: 0;
+  }
+  .osd_shippingIdexample {
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+  }
+  .osd_shippingIDLabel {
+    height: 22px;
+    width: 22px;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--earth);
+    z-index: 1;
+  }
+  .osd_sentOnDateLabelChild {
+    align-self: stretch;
+    height: 1px;
+    position: relative;
+    background-color: var(--sand);
+    border-top: 1px solid var(--sand);
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  .osd_sentOnDateLabel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 0 var(--padding-3xs);
+  }
+  .osd_frameItem {
+    height: 22px;
+    width: 22px;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--sand);
+    z-index: 1;
+  }
+  .osd_sentOnDateLabelParent {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  .osd_ongoingShipmentLabel {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 var(--padding-mid) 0 0;
+  }
+  .osd_sentOnDate {
+    width: 122px;
+    position: relative;
+    display: inline-block;
+    font-weight: 300;
+    z-index: 1;
+  }
+  .osd_ongoingShipmentLabelParent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-mini);
+    min-width: 147px;
+  }
+  .osd_fRAME,
+  .osd_shippingIDLabelParent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .osd_shippingIDLabelParent {
+    flex: 1;
+    flex-wrap: wrap;
+    row-gap: 20px;
+  }
+  .osd_fRAME {
+    align-self: stretch;
+    padding: 0 0 0 var(--padding-lg);
+    text-align: right;
+  }
+  .osd_frameInner {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    margin: 0 !important;
+    top: calc(50% - 11px);
+    left: calc(50% - 11px);
+    border-radius: 50%;
+    background-color: var(--sand);
+    z-index: 3;
+  }
+  .osd_rectangleParent {
+    align-self: stretch;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-4xl) var(--padding-8xl);
+    position: relative;
+    gap: var(--gap-mini);
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--sand);
+    font-family: var(--font-inter);
+  }
+  

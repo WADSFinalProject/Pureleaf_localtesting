@@ -1,0 +1,450 @@
+/* Centra Home */
+
+.centraHome_mainHome {
+    width: 100%;
+    position: relative;
+    background-color: var(--glow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 54px 0 0;
+    box-sizing: border-box;
+    gap: 32px;
+    line-height: normal;
+    letter-spacing: normal;
+}
+.centraHome_InnerSection {
+    align-self: stretch;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0 var(--padding-16xl) var(--padding-6xl) var(--padding-15xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+}
+.centraHome_frameParent {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 33px;
+}
+.centraHome_featuresParent {
+    flex-direction: column;
+    gap: var(--gap-smi);
+}
+.centraHome_featuresParent,
+.centraHome_rectangleParent2 {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.centraHome_features {
+  position: relative;
+  display: inline-block;
+  min-width: 58px;
+}
+.centraHome_rectangleParent2 {  
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: var(--gap-xl);
+  display: flex;
+  justify-content: space-between;
+} 
+.centraHome_box1,
+.centraHome_box2,
+.centraHome_box3 {
+  height: 65px;
+  flex: 1;
+  position: relative;
+  background-color: var(--moss);
+  min-width: 97px;
+  text-decoration: none;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.centraHome_mobileHarbourHomeChild {
+  align-self: stretch;
+  height: 78px;
+  position: relative;
+  background-color: var(--ash);
+}   
+
+.centraHome_frameParent,
+.centraHome_InnerSection {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+}
+
+/* Centra Search Shipment */
+
+.body {
+    background-color: var--(glow)
+  }
+  
+  .centrashipmentsearch_frameChild {
+      align-self: stretch;
+      width: 59px;
+      position: relative;
+      border-radius: 50%;
+      background-color: var(--color-gainsboro);
+    }
+    .centrashipmentsearch_fullName,
+    .centrashipmentsearch_location {
+      position: relative;
+      display: inline-block;
+    }
+    .centrashipmentsearch_fullName {
+      margin: 0;
+      font-size: inherit;
+      font-weight: 600;
+      font-family: inherit;
+      min-width: 95px;
+    }
+    .centrashipmentsearch_location {
+      font-size: var(--font-size-sm);
+      font-weight: 200;
+      min-width: 56px;
+    }
+    .centrashipmentsearch_frameWrapper,
+    .centrashipmentsearch_fullnameParent {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .centrashipmentsearch_frameWrapper {
+      justify-content: flex-end;
+      padding: 0 0 var(--padding-6xs);
+    }
+    .centrashipmentsearch_profilepicParent {
+      height: 59px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: var(--gap-lgi);
+    }
+    .centrashipmentsearch_trackingShipmentParent {
+      position: relative;
+    }
+    .centrashipmentsearch_frameItem {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background-color: var(--sand);
+      align-self: stretch;
+      height: 40px;
+      border-radius: var(--br-11xl);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-2xs) var(--padding-10xl) var(--padding-xs);
+      box-sizing: border-box;
+      font-family: var(--font-inter);
+      font-weight: 200;
+      font-size: var(--font-size-sm);
+      color: var(--color-black);
+      min-width: 160px;
+    }
+    .centrashipmentsearch_trackingShipmentParent {
+      flex: 1;
+      flex-direction: column;
+      gap: var(--gap-8xs);
+    }
+    .centrashipmentsearch_frameContainer,
+    .centrashipmentsearch_frameGroup,
+    .centrashipmentsearch_trackingShipmentParent {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .centrashipmentsearch_frameContainer {
+      align-self: stretch;
+      flex-direction: row;
+      padding: 0 0 0 var(--padding-12xs);
+      font-size: var(--font-size-sm);
+    }
+    .centrashipmentsearch_frameGroup {
+      flex: 1;
+      flex-direction: column;
+      gap: var(--gap-lg);
+      min-width: 174px;
+    }
+    .centrashipmentsearch_frameInner,
+    .centrashipmentsearch_rectangleDiv {
+      position: relative;
+      background-color: var(--color-gainsboro);
+    }
+    .centrashipmentsearch_frameInner {
+      align-self: stretch;
+      flex: 1;
+    }
+    .centrashipmentsearch_rectangleDiv {
+      width: 40px;
+      height: 40px;
+    }
+    .centrashipmentsearch_rectangleParent {
+      height: 129px;
+      width: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: var(--gap-20xl);
+    }
+    .centrashipmentsearch_parentFrame,
+    .centrashipmentsearch_Inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      max-width: 100%;
+    }
+    .centrashipmentsearch_parentFrame {
+      flex: 1;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--gap-9xs);
+    }
+    .centrashipmentsearch_Inner {
+      align-self: stretch;
+      align-items: flex-start;
+      padding: 0 var(--padding-16xl) 0 var(--padding-15xl);
+      box-sizing: border-box;
+      text-align: left;
+      font-size: var(--font-size-xl);
+      color: var(--color-black);
+      font-family: var(--font-inter);
+    }
+
+/* Centra Current Shipment */
+
+.centracurrentShipment_currentShipping,
+.centracurrentShipment_seeAll {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 116px;
+}
+.centracurrentShipment_seeAll {
+  text-decoration: underline;
+  font-weight: 200;
+  white-space: pre-wrap;
+  min-width: 64px;
+}
+.centracurrentShipment_currentShippingParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.centracurrentShipment_frameChild {
+  align-self: stretch;
+  width: 320px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  background-color: var(--sand);
+  display: none;
+}
+.centracurrentShipment_example {
+  font-size: var(--font-size-sm);
+  min-width: 95px;
+}
+.centracurrentShipment_currentLocation,
+.centracurrentShipment_example,
+.centracurrentShipment_example_long {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.centracurrentShipment_currentLocation {
+  font-weight: 200;
+  min-width: 89px;
+}
+.centracurrentShipment_example_long {
+  min-width: 100px;
+}
+.centracurrentShipment_currentLocationParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-10xs);
+}
+.inTransit,
+.centracurrentShipment_status {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.centracurrentShipment_status {
+  font-weight: 200;
+  min-width: 36px;
+}
+.inTransit {
+  min-width: 50px;
+}
+.centracurrentShipment_statusParent {
+  justify-content: flex-start;
+  gap: var(--gap-10xs);
+}
+.centracurrentShipment_frameContainer,
+.centracurrentShipment_statusParent,
+.centracurrentShipment_exampleParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.centracurrentShipment_exampleParent {
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.centracurrentShipment_frameContainer {
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-3xl);
+  box-sizing: border-box;
+  min-width: 100px;
+}
+.centracurrentShipment_frameItem {
+  height: 148px;
+  flex: 1;
+  position: relative;
+  border-radius: 0 var(--br-11xl) var(--br-11xl) 0;
+  background-color: var(--root-chakra);
+  min-width: 97px;
+  z-index: 1;
+}
+.centracurrentShipment_rectangleParent {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  background-color: var(--sand);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 0 var(--padding-3xl);
+  gap: var(--gap-29xl);
+  font-size: var(--font-size-xs);
+}
+.centracurrentShipment_frameParent,
+.centracurrentShipment_frameWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+.centracurrentShipment_frameParent {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-smi);
+}
+.centracurrentShipment_frameWrapper {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 var(--padding-12xs) 0 0;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}
+
+/* Recent Activities */
+
+
+.centraRA_recentActivities {
+    position: relative;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 115px;
+  }
+  .centraRA_frameChild {
+    align-self: stretch;
+    width: 320px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background-color: var(--sand);
+    display: none;
+  }
+  .centraRA_example {
+    min-width: 95px;
+  }
+  
+  .centraRA_inTransit,
+  .centraRA_status,
+  .centraRA_example {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+  }
+  .centraRA_status {
+    font-weight: 200;
+    min-width: 36px;
+  }
+  .centraRA_inTransit {
+    min-width: 50px;
+  }
+  .centraRA_inTransitStatus {
+    justify-content: flex-start;
+    gap: var(--gap-10xs);
+    font-size: var(--font-size-xs);
+  }
+  .centraRA_frameWrapper,
+  .centraRA_inTransitStatus,
+  .centraRA_exampleParent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .centraRA_exampleParent {
+    justify-content: flex-start;
+    gap: var(--gap-5xl);
+  }
+  .centraRA_frameWrapper {
+    justify-content: flex-end;
+    padding: 0 0 var(--padding-xl);
+  }
+  
+  .centraRA_bordersContainer {
+    height: 115px;
+    width: 150px;
+    position: relative;
+    border-radius: 0 var(--br-11xl) var(--br-11xl) 0;
+    background-color: var(--root-chakra);
+    min-width: 150px;
+    z-index: 1;
+  }
+  .centraRA_rectangleParent {
+    align-self: stretch;
+    border-radius: var(--br-11xl);
+    background-color: var(--sand);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 0 0 var(--padding-3xl);
+    gap: var(--gap-xl);
+  }
+  .centraRA_recentActivitiesParent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-smi);
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+  }
+  

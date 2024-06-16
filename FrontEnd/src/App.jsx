@@ -9,10 +9,26 @@ import ResetPass from "./pages/authentication/ResetPass_Web";
 import TestWeb from "./pages/test/test_web";
 import TestWeb2 from "./pages/test/test_web2";
 import TestWeb3 from "./pages/test/test_web3";
+
 import Dashboard from './pages/admin/Dashboard';
 import History from './pages/admin/History';
 import Ongoing from './pages/admin/Ongoing';
 import Upcoming from './pages/admin/Upcoming';
+
+import BatchHistory from './pages/centra/batchhistory';
+import Centrahome from './pages/centra/centrahome';
+import MCentraAddPowdered from './pages/centra/newbatchaddpowder';
+import MCentraAddWet from './pages/centra/newbatchaddwet';
+import MCentraAddDry from './pages/centra/newbatchdryleaves';
+import MCentraNewBatchDetails from './pages/centra/newbatchdetails';
+import MCentraShipmentConfirmed from './pages/centra/newbatchconfirmed';
+import NewBatchFirst from './pages/centra/newbatchstart';
+import OngoingBatches from './pages/centra/ongoingbatches';
+
+import ConfirmOrder from './pages/harbor/confirmorder';
+import Harborhome from './pages/harbor/harborhome';
+import Ongoingshipments from './pages/harbor/ongoingshipments';
+import ShippingHistory from './pages/harbor/shippinghistory';
 
 const App = () => {
   const { isAuthenticated, userType } = useContext(AuthContext);
@@ -40,8 +56,29 @@ const App = () => {
                 <Route path="/upcoming" element={<Upcoming />} />
               </>
             )}
-            {userType === 2 && <Route path="/" element={<TestWeb2 />} />}
-            {userType === 3 && <Route path="/" element={<TestWeb3 />} />}
+            {userType === 2 && (
+              <>
+                <Route path="/" element={<Centrahome />} />
+                <Route path="/newbatch1" element={<NewBatchFirst />} />
+                <Route path="/newbatch2" element={<MCentraAddWet />} />
+                <Route path="/newbatch3" element={<MCentraAddDry />} />
+                <Route path="/newbatch4" element={<MCentraAddPowdered />} />
+                <Route path="/newbatch5" element={<MCentraNewBatchDetails />} />
+                <Route path="/newbatch6" element={<MCentraShipmentConfirmed />} />
+                <Route path="/ongoingbatch" element={<OngoingBatches />} />
+                <Route path="/batchhist" element={<BatchHistory />} />
+              </>
+            )}
+            {userType === 3 && (
+              <React.Fragment>
+                <Route path="/harborhome" element={<Harborhome />} />
+                <Route path="*" element={<Navigate to="/harborhome" />} />
+                <Route path="/" element={<Harborhome />} />
+                <Route path="/ongoingshipments" element={<Ongoingshipments />} />
+                <Route path="/confirmorder/:id" element={<ConfirmOrder />} /> 
+                <Route path="/shippinghistory" element={<ShippingHistory />} />
+              </React.Fragment>
+            )}
             <Route path="*" element={<Navigate to="/" />} />
           </>
         )}

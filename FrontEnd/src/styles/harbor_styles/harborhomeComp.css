@@ -1,0 +1,360 @@
+.searchship_body {
+  background-color: var--(glow)
+}
+
+.searchship_frameChild {
+    align-self: stretch;
+    width: 59px;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--color-gainsboro);
+  }
+  .searchship_fullName,
+  .searchship_location {
+    position: relative;
+    display: inline-block;
+  }
+  .searchship_fullName {
+    margin: 0;
+    font-size: inherit;
+    font-weight: 600;
+    font-family: inherit;
+    min-width: 95px;
+  }
+  .searchship_location {
+    font-size: var(--font-size-sm);
+    font-weight: 200;
+    min-width: 56px;
+  }
+  .searchship_frameWrapper,
+  .searchship_fullnameParent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .searchship_frameWrapper {
+    justify-content: flex-end;
+    padding: 0 0 var(--padding-6xs);
+  }
+  .searchship_profilepicParent {
+    height: 59px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-lgi);
+  }
+  .searchship_trackingShipmentParent {
+    position: relative;
+  }
+  .searchship_frameItem {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background-color: var(--sand);
+    align-self: stretch;
+    height: 40px;
+    border-radius: var(--br-11xl);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-2xs) var(--padding-10xl) var(--padding-xs);
+    box-sizing: border-box;
+    font-family: var(--font-inter);
+    font-weight: 200;
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    min-width: 160px;
+  }
+  .searchship_trackingShipmentParent {
+    flex: 1;
+    flex-direction: column;
+    gap: var(--gap-8xs);
+  }
+  .searchship_frameContainer,
+  .searchship_frameGroup,
+  .searchship_trackingShipmentParent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .searchship_frameContainer {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 0 0 var(--padding-12xs);
+    font-size: var(--font-size-sm);
+  }
+  .searchship_frameGroup {
+    flex: 1;
+    flex-direction: column;
+    gap: var(--gap-lg);
+    min-width: 174px;
+  }
+  .searchship_frameInner,
+  .searchship_rectangleDiv {
+    position: relative;
+    background-color: var(--color-gainsboro);
+  }
+  .searchship_frameInner {
+    align-self: stretch;
+    flex: 1;
+  }
+  .searchship_rectangleDiv {
+    width: 40px;
+    height: 40px;
+  }
+  .searchship_rectangleParent {
+    height: 129px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-20xl);
+  }
+  .searchship_parentFrame,
+  .searchship_Inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+  .searchship_parentFrame {
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--gap-9xs);
+  }
+  .searchship_Inner {
+    align-self: stretch;
+    align-items: flex-start;
+    padding: 0 var(--padding-16xl) 0 var(--padding-15xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+  }
+  
+/* current shipment css */
+
+.currentShipping,
+.cs_seeAll {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 116px;
+}
+.cs_seeAll {
+  text-decoration: underline;
+  font-weight: 200;
+  white-space: pre-wrap;
+  min-width: 64px;
+}
+.cs_currentShippingParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.cs_frameChild {
+  align-self: stretch;
+  width: 320px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  background-color: var(--sand);
+  display: none;
+}
+.cs_example {
+  font-size: var(--font-size-sm);
+  min-width: 95px;
+}
+.cs_currentLocation,
+.cs_example,
+.cs_example_long {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.cs_currentLocation {
+  font-weight: 200;
+  min-width: 89px;
+}
+.cs_example_long {
+  min-width: 100px;
+}
+.cs_currentLocationParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-10xs);
+}
+.inTransit,
+.cs_status {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.cs_status {
+  font-weight: 200;
+  min-width: 36px;
+}
+.inTransit {
+  min-width: 50px;
+}
+.cs_statusParent {
+  justify-content: flex-start;
+  gap: var(--gap-10xs);
+}
+.cs_frameContainer,
+.cs_statusParent,
+.cs_exampleParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cs_exampleParent {
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+.cs_frameContainer {
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-3xl);
+  box-sizing: border-box;
+  min-width: 100px;
+}
+.cs_frameItem {
+  height: 148px;
+  flex: 1;
+  position: relative;
+  border-radius: 0 var(--br-11xl) var(--br-11xl) 0;
+  background-color: var(--root-chakra);
+  min-width: 97px;
+  z-index: 1;
+}
+.cs_rectangleParent {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  background-color: var(--sand);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 0 0 var(--padding-3xl);
+  gap: var(--gap-29xl);
+  font-size: var(--font-size-xs);
+}
+.cs_frameParent,
+.cs_frameWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+.cs_frameParent {
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-smi);
+}
+.cs_frameWrapper {
+  align-self: stretch;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0 var(--padding-12xs) 0 0;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}
+
+/* Recent Activities */
+
+.recentActivities {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 115px;
+}
+.ra_frameChild {
+  align-self: stretch;
+  width: 320px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  background-color: var(--sand);
+  display: none;
+}
+.ra_example {
+  min-width: 95px;
+}
+
+.ra_inTransit,
+.ra_status,
+.ra_example {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.ra_status {
+  font-weight: 200;
+  min-width: 36px;
+}
+.ra_inTransit {
+  min-width: 50px;
+}
+.ra_inTransitStatus {
+  justify-content: flex-start;
+  gap: var(--gap-10xs);
+  font-size: var(--font-size-xs);
+}
+.ra_frameWrapper,
+.ra_inTransitStatus,
+.ra_exampleParent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ra_exampleParent {
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+}
+.ra_frameWrapper {
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-xl);
+}
+
+.ra_bordersContainer {
+  height: 115px;
+  width: 150px;
+  position: relative;
+  border-radius: 0 var(--br-11xl) var(--br-11xl) 0;
+  background-color: var(--root-chakra);
+  min-width: 150px;
+  z-index: 1;
+}
+.ra_rectangleParent {
+  align-self: stretch;
+  border-radius: var(--br-11xl);
+  background-color: var(--sand);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 0 0 var(--padding-3xl);
+  gap: var(--gap-xl);
+}
+.ra_recentActivitiesParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-smi);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
+  font-family: var(--font-inter);
+}

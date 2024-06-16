@@ -1,0 +1,197 @@
+.CO_confirmShipment {
+    position: relative;
+    font-weight: 600;
+  }
+  .CO_cancel {
+    position: relative;
+    display: inline-block;
+    min-width: 53px;
+    text-decoration: none;
+  }
+  .CO_cancelButton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-11xs) 0 0;
+    font-size: var(--font-size-base);
+  }
+  .CO_confirmShipmentParent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--gap-xl);
+  }
+  .CO_frameChild {
+    width: 320px;
+    height: 617px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background-color: var(--ash);
+    display: none;
+    z-index: 0;
+  }
+  .CO_shippingDetails,
+  .CO_shippingId {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+  }
+  .CO_shippingDetails {
+    font-weight: 600;
+    min-width: 129px;
+  }
+  .CO_shippingId {
+    min-width: 87px;
+  }
+  .CO_shippingIdWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-lg);
+  }
+  .CO_frameInner,
+  .CO_frameItem {
+    width: 106px;
+    height: 89px;
+    position: absolute;
+    margin: 0 !important;
+    top: 229px;
+    border-radius: var(--br-mini);
+  }
+  .CO_frameItem {
+    left: 85px;
+    background-color: #8a8a8a;
+    z-index: 2;
+  }
+  .CO_frameInner {
+    right: 87px;
+    background-color: #6e6e6e;
+    z-index: 3;
+  }
+  .CO_date,
+  .CO_uploadImages {
+    position: relative;
+    display: inline-block;
+    min-width: 36px;
+    z-index: 1;
+  }
+  .CO_uploadImages {
+    min-width: 113px;
+  }
+  .CO_frameChild1,
+  .CO_rectangleDiv {
+    height: 89px;
+    flex: 1;
+    position: relative;
+    border-radius: var(--br-mini);
+    background-color: #aaa;
+    min-width: 70px;
+    z-index: 1;
+  }
+  .CO_frameChild1 {
+    background-color: #474747;
+    z-index: 4;
+    display: none;
+  }
+  .CO_dateParent,
+  .CO_imageUploadLabel,
+  .CO_rectangleGroup {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .CO_rectangleGroup {
+    align-self: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gap-lg);
+  }
+  .CO_dateParent,
+  .CO_imageUploadLabel {
+    flex-direction: column;
+  }
+  .CO_imageUploadLabel {
+    align-self: stretch;
+    gap: var(--gap-3xl);
+    color: var(--sand);
+  }
+  .CO_dateParent {
+    flex: 1;
+    gap: var(--gap-11xl);
+  }
+  .CO_dateLabel,
+  .CO_sendPickupNotification {
+    font-size: var(--font-size-base);
+    font-family: var(--font-inter);
+    color: var(--glow);
+    text-align: left;
+  }
+  .CO_dateLabel {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 var(--padding-xl) 180px var(--padding-lg);
+  }
+  .CO_sendPickupNotification {
+    position: relative;
+    font-weight: 600;
+  }
+  .CO_sendPickupNotificationWrapper {
+    cursor: pointer;
+    border: 0;
+    padding: 15px 30px;
+    background-color: var(--matcha);
+    flex: 1;
+    border-radius: 55px;
+    flex-direction: row;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .CO_frameWrapper,
+  .CO_madminConfirmOrder,
+  .CO_rectangleParent,
+  .CO_sendPickupNotificationWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .CO_frameWrapper {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 var(--padding-2xs);
+  }
+  .CO_madminConfirmOrder,
+  .CO_rectangleParent {
+    position: relative;
+    flex-direction: column;
+    text-align: left;
+    font-family: var(--font-inter);
+  }
+  .CO_rectangleParent {
+    align-self: stretch;
+    border-radius: var(--br-11xl);
+    background-color: var(--ash);
+    padding: 40px var(--padding-6xl);
+    gap: var(--gap-11xl);
+    font-size: var(--font-size-base);
+    color: var(--sand);
+  }
+  .CO_madminConfirmOrder {
+    width: 100%;
+    background-color: var(--glow);
+    overflow: hidden;
+    padding: 69px var(--padding-16xl) 90px;
+    box-sizing: border-box;
+    gap: 44px;
+    line-height: normal;
+    letter-spacing: normal;
+    font-size: var(--font-size-xl);
+    color: var(--ash);
+  }
+  

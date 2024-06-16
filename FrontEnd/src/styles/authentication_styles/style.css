@@ -34,7 +34,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/src/images/background-new.png'), url('/src/images/background-new.png'), url('/src/images/background-new.png'); /* Use two instances of the same image */
+  background-image: url('../../images/authentication/background-new.png'), url('../../images/authentication/background-new.png');
   background-size: cover, cover; /* Ensure each image covers the container */
   background-repeat: no-repeat; /* No need to repeat the image */
   animation: slideBackground 70s linear infinite;

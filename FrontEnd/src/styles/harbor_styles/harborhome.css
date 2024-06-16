@@ -1,0 +1,80 @@
+.harborhome_mainHome {
+    width: 100%;
+    position: relative;
+    background-color: var(--glow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 54px 0 0;
+    box-sizing: border-box;
+    gap: 32px;
+    line-height: normal;
+    letter-spacing: normal;
+}
+.harborhome_InnerSection {
+    align-self: stretch;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0 var(--padding-16xl) var(--padding-6xl) var(--padding-15xl);
+    box-sizing: border-box;
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+}
+.harborhome_frameParent {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 33px;
+}
+.harborhome_featuresParent {
+    flex-direction: column;
+    gap: var(--gap-smi);
+}
+.harborhome_featuresParent,
+.harborhome_rectangleParent2 {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.harborhome_features {
+  position: relative;
+  display: inline-block;
+  min-width: 58px;
+}
+.harborhome_rectangleParent2 {  
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap-xl);
+  display: flex;
+} 
+.harborhome_box1,
+.harborhome_box2 {
+  height: 65px;
+  flex: 1;
+  position: relative;
+  background-color: var(--moss);
+  min-width: 97px;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.harborhome_mobileHarbourHomeChild {
+  align-self: stretch;
+  height: 78px;
+  position: relative;
+  background-color: var(--ash);
+}   
+
+.harborhome_frameParent,
+.harborhome_InnerSection {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+}
