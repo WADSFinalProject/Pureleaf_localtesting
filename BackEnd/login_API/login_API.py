@@ -69,14 +69,15 @@ def register_user(user: UserRegistration):
                 cursor.execute(harbor_query, (user_record.uid,))
             
             connection.commit()
-            return {"uid": user_record.uid, "email": user.email, "username": user.username, "user_type": user.user_type}
+            return {"uid": user_record.uid, "email": user.email, "username": user.username, "user_type_ID": user.user_type}
         
         except exceptions.FirebaseError as e:
             connection.rollback()
             raise HTTPException(status_code=400, detail=str(e))
-        except Error as e:
+        except mysql.connector.Error as e:
             connection.rollback()
             print("Failed to insert record into MySQL table {}".format(e))
+            raise HTTPException(status_code=500, detail="Failed to insert record into MySQL table")
         finally:
             if connection.is_connected():
                 cursor.close()

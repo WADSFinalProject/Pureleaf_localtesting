@@ -1,32 +1,61 @@
-// Register_Web.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import '../../styles/authentication_styles/style.css';
 import { FcGoogle } from 'react-icons/fc';
 import { PiMicrosoftOutlookLogoFill } from "react-icons/pi";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
 import logo from '/src/images/authentication/logo.png';
+import axios from 'axios';
 
 const Register = () => {
   const [email, setEmail] = useState('');
+  const [displayEmail, setDisplayEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); 
   const imageContainerRef = useRef(null);
 
   const handleChange = (event) => {
     const inputEmail = event.target.value;
-    const atIndex = inputEmail.indexOf('@');
-    const maskedEmail = atIndex > 0 ? inputEmail.substring(0, atIndex).replace(/./g, '*') + inputEmail.substring(atIndex) : inputEmail;
-    setEmail(maskedEmail);
+    setEmail(inputEmail);
+    setDisplayEmail(inputEmail)
+
+    // const atIndex = inputEmail.indexOf('@');
+    // if (atIndex > 0) {
+    //   const maskedEmail = inputEmail.substring(0, atIndex).replace(/./g, '*') + inputEmail.substring(atIndex);
+    //   setDisplayEmail(maskedEmail);
+    // } else {
+    //   setDisplayEmail(inputEmail);
+    // }
   };
 
   const handlePhoneChange = (event) => {
-      const inputPhone = event.target.value;
-      const placeholder = "+62 | ";
+    const inputPhone = event.target.value;
+    const placeholder = "+62 | ";
 
-      if (!inputPhone.startsWith(placeholder) && !inputPhone.startsWith('|')) {
-        setPhone(placeholder);
-      } else {
-        setPhone(inputPhone);
-      }
+    if (!inputPhone.startsWith(placeholder) && !inputPhone.startsWith('|')) {
+      setPhone(placeholder);
+    } else {
+      setPhone(inputPhone);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError('');
+
+    try {
+      const user = { email, username, password };
+      // Store user data in local storage
+      localStorage.setItem('user', JSON.stringify(user));
+
+      // Redirect to role selection page
+      navigate('/role'); // Use navigate instead of history.push
+    } catch (error) {
+      setError('Registration failed. Please try again.');
+      console.error('There was an error!', error);
+    }
   };
 
   useEffect(() => {
@@ -47,31 +76,41 @@ const Register = () => {
         <h1 className="signup-title">GET STARTED</h1>
         <p className="subtitle-label">Create an account</p>
 
-        <p className="fullname-label">NAME</p>
-        <input type="text" className="fullname_text-field" placeholder="Enter your full name"/>
+        <form onSubmit={handleSubmit}>
+          <p className="fullname-label">NAME</p>
+          <input
+            type="text"
+            className="fullname_text-field"
+            placeholder="Enter your full name"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
 
-        <p className="email-label">E-MAIL</p>
-        <input
-          type="text"
-          className="email_text-field"
-          placeholder="Enter e-mail account"
-          value={email}
-          onChange={handleChange}
-        />
+          <p className="email-label">E-MAIL</p>
+          <input
+            type="text"
+            className="email_text-field"
+            placeholder="Enter e-mail account"
+            value={displayEmail}
+            onChange={handleChange}
+            required
+          />
 
-        <p className="phone-label">PHONE NUMBER</p>
-        <input
-          type="text"
-          className="phone_text-field"
-          placeholder="+62 | Enter your phone number"
-          value={phone}
-          onChange={handlePhoneChange}
-        />
+          <p className="signuppass-label">PASSWORD</p>
+          <input
+            type="password"
+            className="signuppass_text-field"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <p className="signuppass-label">PASSWORD</p>
-        <input type="password" className="signuppass_text-field" placeholder="Enter your password"/>
+          <button type="submit" className="signup-button">SIGN UP</button>
+        </form>
 
-        <button className="signup-button">SIGN UP</button>
+        {error && <p className="error-message">{error}</p>}
 
         <div className="alternative-signup">
           <div className="line"></div>
@@ -84,7 +123,7 @@ const Register = () => {
           <button className="icon-button"><PiMicrosoftOutlookLogoFill size={30} style={{ color: '#0078d4' }} /></button>
         </div>
 
-        <p className="login-label"><Link to="/" style={{ color: '#DFD9C3', textDecoration: 'none'  }}>Already have an account? Log in</Link></p>
+        <p className="login-label"><Link to="/" style={{ color: '#DFD9C3', textDecoration: 'none' }}>Already have an account? Log in</Link></p>
       </div>
     </div>
   );

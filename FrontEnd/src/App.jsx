@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthContext, AuthProvider } from './AuthContext';
 import Login from "./pages/authentication/Login_Web";
 import Register from "./pages/authentication/Register_Web";
+import Role from "./pages/authentication/Role_Web";
 import ForgotPass from "./pages/authentication/ForgotPass_Web";
 import ResetPass from "./pages/authentication/ResetPass_Web";
 import TestWeb from "./pages/test/test_web";
@@ -24,6 +25,7 @@ const App = () => {
           <React.Fragment>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/role" element={<Role />} />
             <Route path="/forgotpass" element={<ForgotPass />} />
             <Route path="/resetpass" element={<ResetPass />} />
           </React.Fragment>
