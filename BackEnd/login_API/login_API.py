@@ -144,9 +144,6 @@ async def login(email: str = Body(...), password: str = Body(...)):
     else:
         raise HTTPException(status_code=401, detail="Authentication failed")
     
-
-# Get user information
-
 # Get user information
 @app.get("/user/{user_id}")
 def get_user_info(user_id: str):
@@ -157,6 +154,29 @@ def get_user_info(user_id: str):
             cursor.execute("SELECT user_id, username, email, user_type_id FROM user_account WHERE user_id = %s", (user_id,))
             user_info = cursor.fetchone()
             if user_info:
+                user_type_id = user_info['user_type_id']
+                if user_type_id == 2:
+                    # Fetch centra information
+                    cursor.execute("SELECT centra_ID FROM centra_user WHERE user_id = %s", (user_id,))
+                    centra_id = cursor.fetchone()
+                    if centra_id:
+                        cursor.execute("SELECT centra_name, centra_address FROM centra_detail WHERE centra_ID = %s", (centra_id['centra_ID'],))
+                        centra_detail = cursor.fetchone()
+                        if centra_detail:
+                            user_info.update(centra_detail)
+                        else:
+                            raise HTTPException(status_code=404, detail="Centra details not found")
+                elif user_type_id == 3:
+                    # Fetch harbor information
+                    cursor.execute("SELECT harbor_ID FROM harbor_guard_user WHERE user_id = %s", (user_id,))
+                    harbor_id = cursor.fetchone()
+                    if harbor_id:
+                        cursor.execute("SELECT harbor_name, harbor_address FROM harbor_detail WHERE harbor_ID = %s", (harbor_id['harbor_ID'],))
+                        harbor_detail = cursor.fetchone()
+                        if harbor_detail:
+                            user_info.update(harbor_detail)
+                        else:
+                            raise HTTPException(status_code=404, detail="Harbor details not found")
                 return user_info
             else:
                 raise HTTPException(status_code=404, detail="User not found")
@@ -168,3 +188,4 @@ def get_user_info(user_id: str):
                 connection.close()
     else:
         raise HTTPException(status_code=500, detail="Failed to connect to the database")
+
