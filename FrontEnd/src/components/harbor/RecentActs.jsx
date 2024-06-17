@@ -3,7 +3,7 @@ import "../../styles/harbor_styles/harborhomeComp.css";
 const RecentActivities = () => {
   return (
     <div className="ra_recentActivitiesParent">
-      <div className="recentActivies">Recent Activities</div>
+      <div className="recentActivies" style={{ fontWeight: 'bold' }}>Recent Activities</div>
       <div className="ra_rectangleParent">
         <div className="ra_frameChild" />
         <div className="ra_frameWrapper">

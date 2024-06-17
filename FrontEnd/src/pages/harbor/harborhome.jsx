@@ -13,7 +13,7 @@ const Harborhome = () => {
                 <div className="harborhome_frameParent">
                     <CurrentShipping />
                     <div className="harborhome_featuresParent">
-                        <div className="harborhome_features">Features</div>
+                        <div className="harborhome_features" style={{ fontWeight: 'bold' }}>Features</div>
                         <div className="harborhome_rectangleParent2">
                             <Link to="/ongoingshipments" className="harborhome_box1">Ongoing Shipments</Link>
                             <Link to="/shippinghistory" className="harborhome_box2">Shipping History</Link>
