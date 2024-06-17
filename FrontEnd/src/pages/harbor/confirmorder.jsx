@@ -1,42 +1,101 @@
-// src/pages/confirmorder.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import "../../styles/harbor_styles/confirmorder.css";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ConfirmOrder = () => {
   const { id } = useParams(); // Use 'id' to match the route parameter
+  const { userData } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
+  const [shipmentDetails, setShipmentDetails] = useState(null);
+  const [batchRescale, setBatchRescale] = useState('');
+  const [transportStatus, setTransportStatus] = useState('');
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+  useEffect(() => {
+    const fetchShipmentDetails = async () => {
+      try {
+        console.log("userData:", userData);  // Debugging log
+        const harborID = userData.harbor_ID;
+        console.log("harborID:", harborID);  // Debugging log
+        const response = await fetch(`http://127.0.0.1:8003/shipment/${harborID}/${id}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setShipmentDetails(data);
+        setBatchRescale(data.harbor_batch_rescale);
+        setTransportStatus(data.transport_status);
+      } catch (error) {
+        console.error('Error fetching shipment details:', error);
+      }
+    };
 
-  const handleUpload = async () => {
+    if (userData) {
+      fetchShipmentDetails();
+    }
+  }, [id, userData]);
+
+  const handleUpdate = async () => {
+    const harborID = userData.harbor_ID;
+    let updateSuccess = false;
+
     try {
-      const formData = new FormData();
-      formData.append('file', selectedFile);
+      const updateShipmentStatus = fetch(`http://127.0.0.1:8003/updateShipment/${harborID}/${shipmentDetails.checkpoint_ID}/${transportStatus}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-      const response = await fetch('http://127.0.0.1:8000/upload', {
-        method: 'POST',
-        body: formData
-      }); 
+      const updateHarborShipment = fetch(`http://127.0.0.1:8003/update_harbor_shipment/${harborID}/${shipmentDetails.checkpoint_ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          harbor_batch_rescale: batchRescale,
+          transport_status: transportStatus,
+        }),
+      });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      const [shipmentStatusResponse, harborShipmentResponse] = await Promise.all([updateShipmentStatus, updateHarborShipment]);
+
+      if (shipmentStatusResponse.ok) {
+        updateSuccess = true;
+      } else {
+        toast.error('Failed to update shipment status.');
       }
 
-      const responseData = await response.json();
-      setUploadStatus('Upload successful. Photo URL: ' + responseData.photoUrl);
+      if (harborShipmentResponse.ok) {
+        updateSuccess = true;
+      } else {
+        toast.error('Failed to update harbor shipment.');
+      }
+
+      if (updateSuccess) {
+        toast.success('Shipment Information has successfully been updated.');
+        setTimeout(() => {
+          navigate('/ongoingshipments');
+        }, 2000); // Redirect after 2 seconds
+      }
     } catch (error) {
-      console.error('Error uploading photo:', error);
-      setUploadStatus('Upload failed.');
+      console.error('Error updating information:', error);
+      toast.error('Update failed.');
     }
   };
 
+  if (!shipmentDetails) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="CO_madminConfirmOrder">
+      <ToastContainer />
       <div className="CO_confirmShipmentParent">
         <div className="CO_confirmShipment">Confirm Shipment</div>
         <div className="CO_cancelButton">
@@ -47,27 +106,51 @@ const ConfirmOrder = () => {
         <div className="CO_frameChild" />
         <div className="CO_shippingDetails">Shipping details:</div>
         <div className="CO_shippingIdWrapper">
-          <div className="CO_shippingId">Shipping ID: {id}</div> {/* Display the correct id */}
+          <div className="CO_shippingId">Shipping ID: {shipmentDetails.checkpoint_ID} </div> 
         </div>
-        <div className="CO_frameItem" />
-        <div className="CO_frameInner" />
-        <section className="CO_dateLabel">
-          <div className="CO_dateParent">
-            <div className="CO_date">Date</div>
-            <div className="CO_imageUploadLabel">
-              <label htmlFor="CO_imageInput" className="CO_uploadImages">Upload images</label>
-              <div className="CO_rectangleGroup">
-                <div className="CO_rectangleDiv" />
-                <input id="imageInput" type="file" accept="image/*" onChange={handleFileChange} className="CO_frameChild1" />
-              </div>
-            </div>
+        <div className="CO_shippingIdWrapper">
+          <div className="CO_shippingId">Batch ID: {shipmentDetails.batch_ID} </div> 
+        </div>
+        <div className="CO_shippingIdWrapper">
+          <div className="CO_shippingId">Batch Rescale Weight (KG): 
+            <input 
+              type="number" 
+              value={batchRescale} 
+              onChange={(e) => setBatchRescale(e.target.value)} 
+            />
+          </div> 
+        </div>
+        <div className="CO_shippingIdWrapper">
+          <div className="CO_shippingId">Transport Status: 
+            <select 
+              value={transportStatus} 
+              onChange={(e) => setTransportStatus(e.target.value)}
+            >
+              <option value="1"> (1) Batch Received</option>
+              <option value="2"> (2) In Transit</option>
+              <option value="3"> (3) Delivered</option>
+              <option value="4"> (4) Delayed</option>
+              <option value="5"> (5) On hold</option>
+              <option value="6"> (6) Cancelled</option>
+            </select>
           </div>
-        </section>
+        </div>
+        <div className="CO_shippingDetails">Handled by:</div>
+        <div className="CO_shippingIdWrapper">
+          <div className="CO_shippingId">Harbor: {userData ? userData.harbor_name : 'Harbor Name'} </div> 
+        </div>
+        <div className="CO_shippingIdWrapper">
+          <div className="CO_shippingId">Harbor Guard Name: {userData ? userData.username : 'Harbor Guard Name'} </div> 
+        </div>
+        <div className="CO_shippingIdWrapper">
+          <div className="CO_shippingId">Harbor Guard ID: {shipmentDetails.hg_user_ID} </div> 
+        </div>
         <div className="CO_frameWrapper">
-          <button className="CO_sendPickupNotificationWrapper" onClick={handleUpload}>
-            <div className="CO_sendPickupNotification"> Send pickup notification </div>
+          <button className="CO_sendPickupNotificationWrapper" onClick={handleUpdate}>
+            <div className="CO_sendPickupNotification"> Confirm Information </div>
           </button>
         </div>
+        {uploadStatus && <div className="CO_uploadStatus">{uploadStatus}</div>}
       </main>
     </div>
   );

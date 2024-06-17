@@ -1,30 +1,22 @@
-import "../../styles/harbor_styles/ongoingshipments.css"
-import { Link } from "react-router-dom"
+import "../../styles/harbor_styles/ongoingshipments.css";
+import { Link } from "react-router-dom";
 
-const OSdeliverycontainer = ({ID_Data}) => {
+const OSdeliverycontainer = ({ ID_Data, shipmentID, batchID, batchRescale, sentOnDate }) => {
     return (
         <Link to={`/confirmorder/${ID_Data}`} className="osd_rectangleParent">
-          <div className="osd_frameChild" />
-          <div className="osd_shippingIdexample">Shipment ID: {ID_Data}</div>
-          <div className="osd_fRAME">
-            <div className="osd_shippingIDLabelParent">
-              <div className="osd_shippingIDLabel" />
-              <div className="osd_ongoingShipmentLabelParent">
-                <div className="osd_ongoingShipmentLabel">
-                  <div className="osd_sentOnDateLabelParent">
-                    <div className="osd_sentOnDateLabel">
-                      <div className="osd_sentOnDateLabelChild" />
+            <div className="osd_frameChild" />
+            <div className="osd_shippingIdexample">Shipment ID: {shipmentID}</div>
+            <div className="osd_shippingIdexample">Batch ID: {batchID}</div>
+            <div className="osd_shippingIdexample">Batch Rescale: {batchRescale}</div>
+            <div className="osd_fRAME">
+                <div className="osd_shippingIDLabelParent">
+                    <div className="osd_ongoingShipmentLabelParent">
+                        <i className="osd_sentOnDate">Sent on: {sentOnDate}</i>
                     </div>
-                    <div className="osd_frameItem" />
-                  </div>
                 </div>
-                <i className="osd_sentOnDate">{`Sent on: <Date>`}</i>
-              </div>
             </div>
-          </div>
-          <div className="osd_frameInner" />
         </Link>
-      );
-}
+    );
+};
 
-export default OSdeliverycontainer
+export default OSdeliverycontainer;

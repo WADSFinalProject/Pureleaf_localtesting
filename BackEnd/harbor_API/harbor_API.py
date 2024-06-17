@@ -304,3 +304,47 @@ def update_harbor_shipment(harbor_ID: int, checkpoint_ID: int, update_data: Harb
     finally:
         cursor.close()
         conn.close()
+
+# Get shipment based on harbor_ID and checkpoint_ID
+@app.get("/shipment/{harbor_ID}/{checkpoint_ID}", response_model=HarborCheckpointInformation)
+def get_shipment_by_harbor_and_checkpoint(harbor_ID: int, checkpoint_ID: int):
+    conn = get_new_connection()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    cursor = conn.cursor(dictionary=True)
+    try:
+        query = """
+        SELECT hc.*, bi.batch_date, bi.dry_leaves_ID, bi.wet_leaves_ID, bi.powdered_leaves_ID, bi.status AS batch_status
+        FROM harbor_checkpoint hc
+        JOIN batch_information bi ON hc.batch_ID = bi.batch_ID
+        WHERE hc.harbor_ID = %s AND hc.checkpoint_ID = %s
+        """
+        cursor.execute(query, (harbor_ID, checkpoint_ID))
+        result = cursor.fetchone()
+        if not result:
+            raise HTTPException(status_code=404, detail="Shipment not found")
+        
+        shipment_info = HarborCheckpointInformation(
+            checkpoint_ID=result["checkpoint_ID"],
+            harbor_batch_rescale=result["harbor_batch_rescale"],
+            sent_date=result["sent_date"],
+            arrival_date=result["arrival_date"],
+            transport_status=result["transport_status"],
+            batch_ID=result["batch_ID"],
+            batch_date=result["batch_date"],
+            dry_leaves_ID=result.get("dry_leaves_ID"),
+            wet_leaves_ID=result.get("wet_leaves_ID"),
+            powdered_leaves_ID=result.get("powdered_leaves_ID"),
+            status=result["batch_status"],
+            dry_leaves=None, 
+            wet_leaves=None, 
+            powdered_leaves=None, 
+            hg_user_ID=result["hg_user_ID"]
+        )
+        return shipment_info
+    except Error as e:
+        print(f"Database error: {e}")
+        raise HTTPException(status_code=500, detail=f"Database query failed: {e}")
+    finally:
+        cursor.close()
+        conn.close()

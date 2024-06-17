@@ -340,12 +340,9 @@ body {
   .pass-label{left: 50%;}
   .signup-label{left: 54%;}
 }
-
-
 /* Register Page */
 .fullname-label,
 .email-label,
-.phone-label,
 .signuppass-label {
   position: absolute;
   top: 22%;
@@ -360,11 +357,6 @@ body {
 .email-label,
 .signuppass-label {
   top: 32%;
-}
-
-.phone-label,
-.signuppass-label {
-  top: 42%;
 }
 
 .signup-title {
@@ -446,7 +438,7 @@ body {
   outline: none;
 }
 
-.phone-label { /*Password*/
+.signuppass-label {
   position: absolute;
   top: 42%;
   left: 37%;
@@ -456,38 +448,9 @@ body {
   color: #FAF9EB;
 }
 
-.phone_text-field {
-  position: absolute;
-  top: 47%;
-  left: 53%;
-  transform: translateX(-50%) translateY(-50%);
-  width: 55%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 20px;
-  color: #938D6B;
-  border: 1px solid #DFD9C3;
-  background-color: #DFD9C3;
-}
-
-.phone_text-field:focus {
-  border-color: #B6A248;
-  outline: none;
-}
-
-.signuppass-label { /*Confirm Password*/
-  position: absolute;
-  top: 52%;
-  left: 37%;
-  transform: translateX(-50%) translateY(-50%);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #FAF9EB;
-}
-
 .signuppass_text-field {
   position: absolute;
-  top: 57%;
+  top: 47%;
   left: 53%;
   transform: translateX(-50%) translateY(-50%);
   width: 55%;
@@ -506,23 +469,21 @@ body {
 
 .fullname_text-field::placeholder,
 .email_text-field::placeholder,
-.phone_text-field::placeholder,
-.signuppass_text-field::placeholder{
+.signuppass_text-field::placeholder {
   font-style: italic; /* Make the placeholder text italic */
   color: #938D6B;
 }
 
 .fullname_text-field:not(:placeholder-shown)::placeholder,
 .email_text-field:not(:placeholder-shown)::placeholder,
-.phone_text-field:not(:placeholder-shown)::placeholder,
-.signuppass_text-field:not(:placeholder-shown)::placeholder{
+.signuppass_text-field:not(:placeholder-shown)::placeholder {
   font-style: normal; /* Remove italic style when focused or contains text */
   font-weight: 600;
 }
 
 .signup-button {
   position: absolute;
-  top: 65%;
+  top: 55%;
   left: 53%;
   transform: translateX(-50%) translateY(-50%);
   width: 55%;
@@ -542,7 +503,7 @@ body {
 .alternative-signup {
   display: flex;
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 53%;
   transform: translateX(-50%) translateY(-50%);
   align-items: center;
@@ -557,10 +518,11 @@ body {
   margin: 0 10px;
 }
 
-.signupbtn-container { /*Container for alternatives*/
+.signupbtn-container {
+  /*Container for alternatives*/
   display: flex;
   position: absolute;
-  top: 80%;
+  top: 75%;
   left: 54%;
   transform: translateX(-50%) translateY(-50%);
 }
@@ -576,14 +538,33 @@ body {
 }
 
 @media (max-width: 500px) {
-  .signup-title{top: 11%;}
-  .email_text-field{top: 38%;}
-  .fullname-label{left: 50%;}
-  .email-label{left: 50%;}
-  .subtitle-label{top: 17%;}
-  .phone-label{left: 50%;}
-  .signuppass-label{left: 50%;}
-  .login-label{left: 50%;}
+  .signup-title {
+    top: 11%;
+  }
+
+  .email_text-field {
+    top: 38%;
+  }
+
+  .fullname-label {
+    left: 50%;
+  }
+
+  .email-label {
+    left: 50%;
+  }
+
+  .subtitle-label {
+    top: 17%;
+  }
+
+  .signuppass-label {
+    left: 50%;
+  }
+
+  .login-label {
+    left: 50%;
+  }
 }
 
 

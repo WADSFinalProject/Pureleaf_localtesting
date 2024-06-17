@@ -67,7 +67,7 @@ class HarborCheckpointInformation(BaseModel):
     harbor_batch_rescale: float
     sent_date: datetime
     arrival_date: datetime
-    transport_status: str
+    transport_status: int
     batch_ID: int
     batch_date: datetime
     dry_leaves_ID: Optional[int]
@@ -83,3 +83,5 @@ class HarborUpdateModel(BaseModel):
     harbor_batch_rescale: Optional[float] = None
     arrival_date: Optional[datetime] = None
     hg_user_ID: Optional[int] = None
+
+
