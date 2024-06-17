@@ -54,6 +54,7 @@ const App = () => {
                 <Route path="/history" element={<History />} />
                 <Route path="/ongoing" element={<Ongoing />} />
                 <Route path="/upcoming" element={<Upcoming />} />
+                <Route path="/login" element={<Login />} />
               </>
             )}
             {userType === 2 && (
@@ -67,6 +68,7 @@ const App = () => {
                 <Route path="/newbatch6" element={<MCentraShipmentConfirmed />} />
                 <Route path="/ongoingbatch" element={<OngoingBatches />} />
                 <Route path="/batchhist" element={<BatchHistory />} />
+                <Route path="/login" element={<Login />} />
               </>
             )}
             {userType === 3 && (
@@ -77,6 +79,7 @@ const App = () => {
                 <Route path="/ongoingshipments" element={<Ongoingshipments />} />
                 <Route path="/confirmorder/:id" element={<ConfirmOrder />} /> 
                 <Route path="/shippinghistory" element={<ShippingHistory />} />
+                <Route path="/login" element={<Login />} />
               </React.Fragment>
             )}
             <Route path="*" element={<Navigate to="/" />} />

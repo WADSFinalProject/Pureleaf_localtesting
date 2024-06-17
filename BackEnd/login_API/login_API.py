@@ -86,7 +86,6 @@ def register_user(user: UserRegistration):
         raise HTTPException(status_code=500, detail="Failed to connect to the database")
 
 
-# Login user
 @app.post("/login")
 async def login(email: str = Body(...), password: str = Body(...)):
     url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDUFJFTNKv-LkGplr4-36MNOMXXj0wFL0Q"
@@ -101,14 +100,45 @@ async def login(email: str = Body(...), password: str = Body(...)):
 
         connection = create_mysql_connection()
         if connection and connection.is_connected():
-            cursor = connection.cursor()
-            cursor.execute("SELECT user_type_id FROM user_account WHERE user_id = %s", (uid,))
-            user_type = cursor.fetchone()[0]
+            try:
+                cursor = connection.cursor()
+                cursor.execute("SELECT user_type_id FROM user_account WHERE user_id = %s", (uid,))
+                user_type = cursor.fetchone()[0]
 
-            cursor.close()
-            connection.close()
+                result = {
+                    "uid": uid,
+                    "email": user_info['email'],
+                    "user_type": user_type
+                }
+                
+                if user_type == 2:  
+                    cursor.execute("SELECT centra_ID FROM centra_user WHERE user_id = %s", (uid,))
+                    centra_id = cursor.fetchone()[0]
+                    result['centra_ID'] = centra_id
 
-            return {"uid": uid, "email": user_info['email'], "user_type": user_type}
+                    cursor.execute("SELECT centra_name, centra_address FROM centra_detail WHERE centra_ID = %s", (centra_id,))
+                    centra_detail = cursor.fetchone()
+                    result['centra_name'] = centra_detail[0]
+                    result['centra_address'] = centra_detail[1]
+
+                if user_type == 3:  
+                    cursor.execute("SELECT harbor_ID FROM harbor_guard_user WHERE user_id = %s", (uid,))
+                    harbor_id = cursor.fetchone()[0]
+                    result['harbor_ID'] = harbor_id
+
+                    cursor.execute("SELECT harbor_name, harbor_address FROM harbor_detail WHERE harbor_ID = %s", (harbor_id,))
+                    harbor_detail = cursor.fetchone()
+                    result['harbor_name'] = harbor_detail[0]
+                    result['harbor_address'] = harbor_detail[1]
+
+                cursor.close()
+                connection.close()
+
+                return result
+            except Error as e:
+                connection.rollback()
+                print(f"Failed to execute query: {e}")
+                raise HTTPException(status_code=500, detail="Internal server error")
         else:
             raise HTTPException(status_code=500, detail="Failed to connect to the database")
     else:
