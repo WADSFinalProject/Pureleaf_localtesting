@@ -384,4 +384,29 @@
     color: var(--glow);
     font-family: var(--font-inter);
   }
+
+  .s_contain_ellipseParent {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+    margin-left: auto; 
+    padding-right: 10px; 
+  }
+  
+  .ellipse {
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%;
+    background-color: grey; 
+    margin: 0 5px; 
+  }
+  
+  .ellipse.delivered {
+    background-color: rgb(97, 255, 97); 
+  }
+  
+  .ellipse.cancelled {
+    background-color: red; 
+  }
+  
   

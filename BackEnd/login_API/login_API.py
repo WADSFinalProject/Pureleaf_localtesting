@@ -164,6 +164,7 @@ def get_user_info(user_id: str):
                         centra_detail = cursor.fetchone()
                         if centra_detail:
                             user_info.update(centra_detail)
+                            user_info['centra_ID'] = centra_id['centra_ID']
                         else:
                             raise HTTPException(status_code=404, detail="Centra details not found")
                 elif user_type_id == 3:
@@ -175,6 +176,7 @@ def get_user_info(user_id: str):
                         harbor_detail = cursor.fetchone()
                         if harbor_detail:
                             user_info.update(harbor_detail)
+                            user_info['harbor_ID'] = harbor_id['harbor_ID']
                         else:
                             raise HTTPException(status_code=404, detail="Harbor details not found")
                 return user_info

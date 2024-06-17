@@ -1,14 +1,40 @@
+import React, { useEffect, useState } from "react";
 import Shiphistorycontainer from "../../components/harbor/shdeliverycontainer.jsx";
-/* import ShippingHistoryBody from "../components/ShippingHistoryBody"; */
 import "../../styles/harbor_styles/shippinghistory.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ShippingHistory = () => {
-    const batch = [{batch_id: 21021380132}, {batch_id: 2999830913}, {batch_id: 23123131231}, {batch_id: 5235235235}]
-    const [shiphistpageinfo, setshiphistpageinfo] = useState(0);
-    const handlepageclick = (newpage) => {setshiphistpageinfo(newpage)};
-    const currentshiphistinfo = batch.slice(shiphistpageinfo);
+  const [shiphistpageinfo, setshiphistpageinfo] = useState(0);
+  const [batches, setBatches] = useState([]);
+  const harborID = JSON.parse(sessionStorage.getItem("userData")).harbor_ID;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log("Fetching data for harbor_ID:", harborID);
+        const response = await axios.get(`http://localhost:8003/shipment/${harborID}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        console.log("API response:", response);
+        const filteredBatches = response.data.filter(batch => batch.transport_status === 3 || batch.transport_status === 6);
+        setBatches(filteredBatches);
+      } catch (error) {
+        console.error("Error fetching shipment data:", error);
+      }
+    };
+
+    fetchData();
+  }, [harborID]);
+
+  const handlepageclick = (newpage) => {
+    setshiphistpageinfo(newpage);
+  };
+
+  const currentshiphistinfo = batches.slice(shiphistpageinfo, shiphistpageinfo + 10); // Adjust the number of items per page as needed
+
   return (
     <div className="shiphist_mharborShippingHistory">
       <section className="shiphist_frameParent">
@@ -18,8 +44,24 @@ const ShippingHistory = () => {
         </div>
         <input className="shiphist_frameChild" placeholder="Search" type="text" />
         Filter By
-        {currentshiphistinfo.map((item,index) => (<Shiphistorycontainer key={item.batch_id} Batch_ID={item.batch_id}/>))}
+        {currentshiphistinfo.map((item, index) => (
+          <Shiphistorycontainer 
+            key={item.batch_ID} 
+            Batch_ID={item.batch_ID} 
+            Checkpoint_ID={item.checkpoint_ID} 
+            Harbor_Batch_Rescale={item.harbor_batch_rescale} 
+            Arrival_Date={item.arrival_date}
+            Transport_Status={item.transport_status}
+          />
+        ))}
       </section>
+      <div className="pagination">
+        {Array.from({ length: Math.ceil(batches.length / 10) }).map((_, index) => (
+          <button key={index} onClick={() => handlepageclick(index * 10)}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
