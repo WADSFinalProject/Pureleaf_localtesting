@@ -41,7 +41,7 @@ const SearchShipment = () => {
         </div>
         <div className="searchship_rectangleParent">
           <div className="searchship_frameInner" onClick={handleLogout}>
-            <FaSignOutAlt size={24} color="black" /> {/* Add the logout icon here */}
+            <FaSignOutAlt size={24} color="black" /> 
           </div>
           <div className="searchship_rectangleDiv" />
         </div>

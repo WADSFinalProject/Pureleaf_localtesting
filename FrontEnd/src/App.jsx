@@ -62,13 +62,12 @@ const App = () => {
                 <Route path="/" element={<Centrahome />} />
                 <Route path="/newbatch1" element={<NewBatchFirst />} />
                 <Route path="/newbatch2" element={<MCentraAddWet />} />
-                <Route path="/newbatch3" element={<MCentraAddDry />} />
-                <Route path="/newbatch4" element={<MCentraAddPowdered />} />
-                <Route path="/newbatch5" element={<MCentraNewBatchDetails />} />
+                <Route path="/newbatch3/:batchID" element={<MCentraAddDry />} />
+                <Route path="/newbatch4/:batchID" element={<MCentraAddPowdered />} />
+                <Route path="/newbatch5/:batchID" element={<MCentraNewBatchDetails />} />
                 <Route path="/newbatch6" element={<MCentraShipmentConfirmed />} />
                 <Route path="/ongoingbatch" element={<OngoingBatches />} />
                 <Route path="/batchhist" element={<BatchHistory />} />
-                <Route path="/login" element={<Login />} />
               </>
             )}
             {userType === 3 && (

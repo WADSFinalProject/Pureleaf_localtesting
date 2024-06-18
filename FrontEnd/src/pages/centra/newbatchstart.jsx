@@ -8,7 +8,7 @@ const NewBatchFirst = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/newbatch2')
+    navigate('/newbatch2');
   };
 
   return (

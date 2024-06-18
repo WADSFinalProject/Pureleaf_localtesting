@@ -1,27 +1,59 @@
 import "../../styles/centra_styles/newbatch.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom"
+import { API } from "./centraAPI";
+import axios from "axios";
+import { useState } from "react";
 
 const MCentraAddPowdered = () => {
+  console.log("pwdr leaves visited")
 
     const navigate = useNavigate();
+    const { batchID } = useParams();
 
-    const handleNextClick = () => {
-      navigate('/newbatch5');
+    const handleNextClick = async() => {
+      const api = API()
+      
+      const powderInfo = {
+        "powdered_leaves_ID": 0,
+        "powdered_weight": weight ? weight : 0,
+        "powdered_date": date ? date : "2024-06-18T05:04:16.197Z",
+        "powdered_image": "string"
+      }
+      const response2 = await axios.post(api + '/set_powdered_leaves_information', powderInfo)
+      const powderedId = response2.data.powdered_leaves_ID;
+      axios.put(api + `/update_powdered_leaves_data/${batchID}?powdered_id=${powderedId}`)
+      axios.put(api + `/update_order_status/${batchID}`, {status: 3})
+      navigate(`/newbatch5/${batchID}`);
     };
   
     const handleBackClick = () => {
-      navigate('/newbatch3');
+      navigate('/');
     };
+
+  const [weight, setWeight] = useState('');
+  const [date, setDate] = useState();
 
   return (
     <div className="NBAP_mcentra-add-powdered">
-      <div className="NBAP_new-batch2">New Batch</div>
+      <div className="NBAP_new-batch2">{`Batch #${batchID}`}</div>
       <Link to="/ongoingshipments" className="NBAP_cancel2">Cancel</Link>
       <div className="NBAP_mcentra-add-powdered-child" />
       <div className="NBAP_powdered-leaves">Powdered leaves:</div>
-      <div className="NBAP_weight2">Weight</div>
-      <div className="NBAP_date3">Date</div>
+      <div className="NBAP_weight2">{"Weight   "}
+        <input 
+              type="number" 
+              value={weight} 
+              onChange={(e) => setWeight(e.target.value)} 
+            />
+      </div>
+      <div className="NBAP_date3">{"Date   "}
+        <input 
+              type="date" 
+              value={date} 
+              onChange={(e) => setDate(e.target.value)} 
+            />
+      </div>
       <div className="NBAP_mcentra-add-powdered-item" />
       <div className="NBAP_mcentra-add-powdered-inner" />
       <div className="NBAP_next1" onClick={handleNextClick}>Next</div>

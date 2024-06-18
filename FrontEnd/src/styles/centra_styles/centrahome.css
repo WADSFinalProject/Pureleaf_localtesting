@@ -180,7 +180,14 @@
       gap: var(--gap-lg);
       min-width: 174px;
     }
-    .centrashipmentsearch_frameInner,
+    .centrashipmentsearch_frameInner {
+      position: relative;
+      /* background-color: var(--color-gainsboro); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
     .centrashipmentsearch_rectangleDiv {
       position: relative;
       background-color: var(--color-gainsboro);
@@ -189,6 +196,8 @@
       align-self: stretch;
       flex: 1;
     }
+
+    
     .centrashipmentsearch_rectangleDiv {
       width: 40px;
       height: 40px;

@@ -44,21 +44,26 @@ const ConfirmOrder = () => {
 
   const handleUpdate = async () => {
     const harborID = userData.harbor_ID;
-    let updateSuccess = false;
-
-    // Get the current date and time in the desired format
     const currentDateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
     setStatusDateChange(currentDateTime);
-
+  
     try {
-      const updateShipmentStatus = fetch(`http://127.0.0.1:8003/updateShipment/${harborID}/${shipmentDetails.checkpoint_ID}/${transportStatus}`, {
+      // Update shipment status
+      const shipmentStatusResponse = await fetch(`http://127.0.0.1:8003/updateShipment/${harborID}/${shipmentDetails.checkpoint_ID}/${transportStatus}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
-      const updateHarborShipment = fetch(`http://127.0.0.1:8003/update_harbor_shipment/${harborID}/${shipmentDetails.checkpoint_ID}`, {
+  
+      if (!shipmentStatusResponse.ok) {
+        const shipmentError = await shipmentStatusResponse.json();
+        toast.error(`Failed to update shipment status: ${shipmentError.detail}`);
+        return; // Exit the function if this update fails
+      }
+  
+      // Update harbor shipment
+      const harborShipmentResponse = await fetch(`http://127.0.0.1:8003/update_harbor_shipment/${harborID}/${shipmentDetails.checkpoint_ID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -66,36 +71,30 @@ const ConfirmOrder = () => {
         body: JSON.stringify({
           harbor_batch_rescale: batchRescale,
           transport_status: transportStatus,
-          status_date_change: currentDateTime, // Include the current date and time in the request body
-          hg_user_ID: userData.hg_user_ID // Ensure hg_user_ID is sent from session data
+          status_date_change: currentDateTime,
+          hg_user_ID: userData.hg_user_ID
         }),
       });
-
-      const [shipmentStatusResponse, harborShipmentResponse] = await Promise.all([updateShipmentStatus, updateHarborShipment]);
-
-      if (shipmentStatusResponse.ok) {
-        updateSuccess = true;
-      } else {
-        toast.error('Failed to update shipment status.');
+  
+      if (!harborShipmentResponse.ok) {
+        const harborError = await harborShipmentResponse.json();
+        toast.error(`Failed to update harbor shipment: ${harborError.detail}`);
+        return; // Exit the function if this update fails
       }
-
-      if (harborShipmentResponse.ok) {
-        updateSuccess = true;
-      } else {
-        toast.error('Failed to update harbor shipment.');
-      }
-
-      if (updateSuccess) {
-        toast.success('Shipment Information has successfully been updated.');
-        setTimeout(() => {
-          navigate('/ongoingshipments');
-        }, 2000); // Redirect after 2 seconds
-      }
+  
+      // If both updates are successful
+      toast.success('Shipment Information has successfully been updated.');
+      setTimeout(() => {
+        navigate('/ongoingshipments');
+      }, 2000); // Redirect after 2 seconds
+  
     } catch (error) {
       console.error('Error updating information:', error);
       toast.error('Update failed.');
     }
   };
+  
+
 
   if (!shipmentDetails) {
     return <div>Loading...</div>;

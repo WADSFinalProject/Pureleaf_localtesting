@@ -2,12 +2,39 @@ import BatchContainer from "../../components/centra/batch_container.jsx";
 import "../../styles/centra_styles/batchcontainer.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { API } from "./centraAPI.jsx";
+import axios from "axios";
+import Cookies from 'js-cookie';
 
 const BatchHistory = () => {
-    const batch = [{batch_id: 21021380132}, {batch_id: 2999830913}, {batch_id: 23123131231}, {batch_id: 5235235235}]
-    const [shiphistpageinfo, setshiphistpageinfo] = useState(0);
-    const handlepageclick = (newpage) => {setshiphistpageinfo(newpage)};
-    const currentshiphistinfo = batch.slice(shiphistpageinfo);
+  async function getUserData() {    
+    try{
+        const userId = Cookies.get('user_id');
+        const response = await axios.get(`http://localhost:8000/user/${userId}`);
+        const result = response.data
+        return result;
+    } catch {
+        return 0;
+    }
+  }
+
+  const [batches, setBatches] = useState([]);
+
+  const api = API();
+
+  useEffect(() => {
+    const updateBatches = async () => {
+        try {
+            const userData = await getUserData()
+            const centraID = userData.centra_ID;
+            const response = await axios.get(api + '/get_all_orders/' + centraID);
+            setBatches(response.data);
+        } catch (error) {
+            console.error('Error fetching batches:', error);
+        }
+    }
+    updateBatches()
+  }, [])
   return (
     <div className="shiphist_mharborShippingHistory">
       <section className="shiphist_frameParent">
@@ -17,7 +44,10 @@ const BatchHistory = () => {
         </div>
         <input className="shiphist_frameChild" placeholder="Search" type="text" />
         Filter By
-        {currentshiphistinfo.map((item,index) => (<BatchContainer key={item.batch_id} Batch_ID={item.batch_id}/>))}
+        {batches.map((item,index) => (<BatchContainer key={item.batch_ID} 
+        Batch_ID={item.batch_ID}
+        date={item.batch_date}
+        status={item.status}/>))}
       </section>
     </div>
   );
