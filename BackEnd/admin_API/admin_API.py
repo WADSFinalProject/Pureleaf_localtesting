@@ -5,6 +5,8 @@ from admin_pydantic import *
 from typing import List
 from fastapi.responses import JSONResponse
 from config import get_new_connection
+import mysql.connector
+from mysql.connector import Error
 
 
 app = FastAPI()

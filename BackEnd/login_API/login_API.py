@@ -7,6 +7,8 @@ import firebase_admin
 from firebase_admin import credentials, auth, exceptions
 import json
 from config import get_new_connection
+import mysql.connector
+from mysql.connector import Error
 
 cred = credentials.Certificate('pureleaf-9d01f-firebase-adminsdk-fyu2u-356ec2f32c.json')
 firebase_admin.initialize_app(cred)

@@ -6,10 +6,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 import mysql.connector
+from mysql.connector import Error
 import datetime
 import random
 
 from centra_pydantic import *
+
 
 connect = mysql.connector.connect(
     host='127.0.0.1',

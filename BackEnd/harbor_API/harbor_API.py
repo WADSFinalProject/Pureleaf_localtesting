@@ -4,6 +4,8 @@ from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from harbor_pydantic import *
 from config import get_new_connection
+import mysql.connector
+from mysql.connector import Error
 
 app = FastAPI()
 
