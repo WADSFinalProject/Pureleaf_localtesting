@@ -969,3 +969,8 @@ body {
   .reset-button{top: 62%;}
   .back-label{top: 67%; left: 63%;}
 }
+
+
+.error-message {
+  color: white;
+}

@@ -11,7 +11,7 @@ const Harborhome = () => {
             <SearchShipment />
             <section className="harborhome_InnerSection">
                 <div className="harborhome_frameParent">
-                    <CurrentShipping />
+                    <RecentActivities />
                     <div className="harborhome_featuresParent">
                         <div className="harborhome_features" style={{ fontWeight: 'bold' }}>Features</div>
                         <div className="harborhome_rectangleParent2">
@@ -19,7 +19,7 @@ const Harborhome = () => {
                             <Link to="/shippinghistory" className="harborhome_box2">Shipping History</Link>
                         </div>
                     </div>
-                    <RecentActivities />
+                    <CurrentShipping />
                 </div>
             </section>
             <footer className="harborhome_mobileHarbourHomeChild" />

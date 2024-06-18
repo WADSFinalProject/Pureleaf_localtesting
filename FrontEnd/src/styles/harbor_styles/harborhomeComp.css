@@ -92,11 +92,20 @@
     gap: var(--gap-lg);
     min-width: 174px;
   }
-  .searchship_frameInner,
+  .searchship_frameInner {
+    position: relative;
+    /* background-color: var(--color-gainsboro); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
   .searchship_rectangleDiv {
     position: relative;
     background-color: var(--color-gainsboro);
   }
+  
   .searchship_frameInner {
     align-self: stretch;
     flex: 1;

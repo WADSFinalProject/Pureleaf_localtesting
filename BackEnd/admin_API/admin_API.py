@@ -1,11 +1,11 @@
 from fastapi import FastAPI, HTTPException, Path
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import mysql.connector
-from mysql.connector import Error
 from admin_pydantic import *
 from typing import List
 from fastapi.responses import JSONResponse
+from config import get_new_connection
+
 
 app = FastAPI()
 
@@ -17,22 +17,6 @@ app.add_middleware(
     allow_methods=["*"],  
     allow_headers=["*"], 
 )
-
-# Establishing MySQL Server Connection (Currently Local)
-def get_new_connection():
-    try:
-        connection = mysql.connector.connect(
-            host="127.0.0.1",
-            user="root",
-            passwd="*neoSQL01",
-            database="central_database",
-            auth_plugin='mysql_native_password'
-        )
-        print("MySQL Database connection successful")
-        return connection
-    except Error as err:
-        print(f"Error: '{err}'")
-        return None
 
 #API Endpoints
 # Get ALL batch infomation

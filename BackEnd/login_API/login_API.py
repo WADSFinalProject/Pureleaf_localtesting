@@ -1,12 +1,12 @@
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, HTTPException, Body, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import requests
 from login_pydantic import *
-import mysql.connector
 import firebase_admin
-from mysql.connector import Error
 from firebase_admin import credentials, auth, exceptions
 import json
+from config import get_new_connection
 
 cred = credentials.Certificate('pureleaf-9d01f-firebase-adminsdk-fyu2u-356ec2f32c.json')
 firebase_admin.initialize_app(cred)
@@ -20,28 +20,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-def create_mysql_connection():
-    try:
-        connection = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='*neoSQL01',
-            database='central_database',
-            auth_plugin='mysql_native_password'
-        )
-        if connection.is_connected():
-            return connection
-    except Error as e:
-        print("Error while connecting to MySQL:", e)
-    return None
     
-
 # API Endpoints
 # Register user endpoint
 @app.post("/register")
 def register_user(user: UserRegistration):
-    connection = create_mysql_connection()
+    connection = get_new_connection()
     if connection.is_connected():
         try:
             # Create user in Firebase
@@ -98,7 +82,7 @@ async def login(email: str = Body(...), password: str = Body(...)):
         user_info = response.json()
         uid = user_info['localId']
 
-        connection = create_mysql_connection()
+        connection = get_new_connection()
         if connection and connection.is_connected():
             try:
                 cursor = connection.cursor()
@@ -146,8 +130,8 @@ async def login(email: str = Body(...), password: str = Body(...)):
     
 # Get user information
 @app.get("/user/{user_id}")
-def get_user_info(user_id: str):
-    connection = create_mysql_connection()
+async def get_user_info(user_id: str, request: Request, response: Response):
+    connection = get_new_connection()
     if connection.is_connected():
         try:
             cursor = connection.cursor(dictionary=True)
@@ -155,31 +139,39 @@ def get_user_info(user_id: str):
             user_info = cursor.fetchone()
             if user_info:
                 user_type_id = user_info['user_type_id']
+                session_data = {}
                 if user_type_id == 2:
                     # Fetch centra information
-                    cursor.execute("SELECT centra_ID FROM centra_user WHERE user_id = %s", (user_id,))
-                    centra_id = cursor.fetchone()
-                    if centra_id:
-                        cursor.execute("SELECT centra_name, centra_address FROM centra_detail WHERE centra_ID = %s", (centra_id['centra_ID'],))
+                    cursor.execute("SELECT centra_ID, user_id AS centra_user_ID FROM centra_user WHERE user_id = %s", (user_id,))
+                    centra_user_info = cursor.fetchone()
+                    if centra_user_info:
+                        cursor.execute("SELECT centra_name, centra_address FROM centra_detail WHERE centra_ID = %s", (centra_user_info['centra_ID'],))
                         centra_detail = cursor.fetchone()
                         if centra_detail:
                             user_info.update(centra_detail)
-                            user_info['centra_ID'] = centra_id['centra_ID']
+                            user_info.update(centra_user_info)  # Add centra_user_ID and centra_ID
+                            session_data['centra_user_ID'] = centra_user_info['centra_user_ID']
                         else:
                             raise HTTPException(status_code=404, detail="Centra details not found")
                 elif user_type_id == 3:
                     # Fetch harbor information
-                    cursor.execute("SELECT harbor_ID FROM harbor_guard_user WHERE user_id = %s", (user_id,))
-                    harbor_id = cursor.fetchone()
-                    if harbor_id:
-                        cursor.execute("SELECT harbor_name, harbor_address FROM harbor_detail WHERE harbor_ID = %s", (harbor_id['harbor_ID'],))
+                    cursor.execute("SELECT harbor_ID, hg_user_ID FROM harbor_guard_user WHERE user_id = %s", (user_id,))
+                    harbor_user_info = cursor.fetchone()
+                    if harbor_user_info:
+                        cursor.execute("SELECT harbor_name, harbor_address FROM harbor_detail WHERE harbor_ID = %s", (harbor_user_info['harbor_ID'],))
                         harbor_detail = cursor.fetchone()
                         if harbor_detail:
                             user_info.update(harbor_detail)
-                            user_info['harbor_ID'] = harbor_id['harbor_ID']
+                            user_info.update(harbor_user_info)  # Add hg_user_ID and harbor_ID
+                            session_data['hg_user_ID'] = harbor_user_info['hg_user_ID']
                         else:
                             raise HTTPException(status_code=404, detail="Harbor details not found")
-                return user_info
+                
+                # Add session data to response headers
+                for key, value in session_data.items():
+                    response.set_cookie(key=key, value=value)
+                
+                return JSONResponse(content=user_info)
             else:
                 raise HTTPException(status_code=404, detail="User not found")
         except Error as e:
@@ -190,4 +182,3 @@ def get_user_info(user_id: str):
                 connection.close()
     else:
         raise HTTPException(status_code=500, detail="Failed to connect to the database")
-

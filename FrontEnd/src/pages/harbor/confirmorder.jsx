@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import dayjs from 'dayjs'; // Import dayjs for date formatting
 
 const ConfirmOrder = () => {
   const { id } = useParams(); // Use 'id' to match the route parameter
@@ -15,6 +16,7 @@ const ConfirmOrder = () => {
   const [shipmentDetails, setShipmentDetails] = useState(null);
   const [batchRescale, setBatchRescale] = useState('');
   const [transportStatus, setTransportStatus] = useState('');
+  const [statusDateChange, setStatusDateChange] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'));
 
   useEffect(() => {
     const fetchShipmentDetails = async () => {
@@ -44,6 +46,10 @@ const ConfirmOrder = () => {
     const harborID = userData.harbor_ID;
     let updateSuccess = false;
 
+    // Get the current date and time in the desired format
+    const currentDateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    setStatusDateChange(currentDateTime);
+
     try {
       const updateShipmentStatus = fetch(`http://127.0.0.1:8003/updateShipment/${harborID}/${shipmentDetails.checkpoint_ID}/${transportStatus}`, {
         method: 'PUT',
@@ -60,6 +66,8 @@ const ConfirmOrder = () => {
         body: JSON.stringify({
           harbor_batch_rescale: batchRescale,
           transport_status: transportStatus,
+          status_date_change: currentDateTime, // Include the current date and time in the request body
+          hg_user_ID: userData.hg_user_ID // Ensure hg_user_ID is sent from session data
         }),
       });
 
@@ -106,10 +114,7 @@ const ConfirmOrder = () => {
         <div className="CO_frameChild" />
         <div className="CO_shippingDetails">Shipping details:</div>
         <div className="CO_shippingIdWrapper">
-          <div className="CO_shippingId">Shipping ID: {shipmentDetails.checkpoint_ID} </div> 
-        </div>
-        <div className="CO_shippingIdWrapper">
-          <div className="CO_shippingId">Batch ID: {shipmentDetails.batch_ID} </div> 
+          <div className="CO_shippingId">Shipping ID: {shipmentDetails.checkpoint_ID} | Batch ID: {shipmentDetails.batch_ID}</div> 
         </div>
         <div className="CO_shippingIdWrapper">
           <div className="CO_shippingId">Batch Rescale Weight (KG): 
@@ -135,6 +140,9 @@ const ConfirmOrder = () => {
             </select>
           </div>
         </div>
+        <div className="CO_shippingIdWrapper">
+          <div className="CO_shippingId">Status Date Change: {statusDateChange}</div> 
+        </div>
         <div className="CO_shippingDetails">Handled by:</div>
         <div className="CO_shippingIdWrapper">
           <div className="CO_shippingId">Harbor: {userData ? userData.harbor_name : 'Harbor Name'} </div> 
@@ -143,7 +151,7 @@ const ConfirmOrder = () => {
           <div className="CO_shippingId">Harbor Guard Name: {userData ? userData.username : 'Harbor Guard Name'} </div> 
         </div>
         <div className="CO_shippingIdWrapper">
-          <div className="CO_shippingId">Harbor Guard ID: {shipmentDetails.hg_user_ID} </div> 
+          <div className="CO_shippingId">Harbor Guard ID: {userData.hg_user_ID} </div> 
         </div>
         <div className="CO_frameWrapper">
           <button className="CO_sendPickupNotificationWrapper" onClick={handleUpdate}>

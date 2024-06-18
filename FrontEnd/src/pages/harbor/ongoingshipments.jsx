@@ -27,7 +27,7 @@ const Ongoingshipments = () => {
     }, []);
 
     const handlepageclick = (newpage) => { setharborpageinfo(newpage); };
-    const currentharborinfo = shipments.slice(harborpageinfo, harborpageinfo + 10);  // Adjust pagination as needed
+    const currentharborinfo = shipments.slice(harborpageinfo, harborpageinfo + 10);  
 
     return (
         <div className="mainOngoingShipment">

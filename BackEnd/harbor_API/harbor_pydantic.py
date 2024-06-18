@@ -84,4 +84,9 @@ class HarborUpdateModel(BaseModel):
     arrival_date: Optional[datetime] = None
     hg_user_ID: Optional[int] = None
 
-
+class UpdateShipment(BaseModel):
+    harbor_batch_rescale: float
+    transport_status: int
+    arrival_date: Optional[datetime] = None
+    hg_user_ID: int
+    
