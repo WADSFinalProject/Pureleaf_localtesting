@@ -6,14 +6,15 @@ import axios from "axios";
 import { useState } from "react";
 
 const MCentraAddPowdered = () => {
-  console.log("pwdr leaves visited")
 
     const navigate = useNavigate();
     const { batchID } = useParams();
+    const [weight, setWeight] = useState('');
+    const [date, setDate] = useState();
 
     const handleNextClick = async() => {
       const api = API()
-      
+  
       const powderInfo = {
         "powdered_leaves_ID": 0,
         "powdered_weight": weight ? weight : 0,
@@ -22,7 +23,7 @@ const MCentraAddPowdered = () => {
       }
       const response2 = await axios.post(api + '/set_powdered_leaves_information', powderInfo)
       const powderedId = response2.data.powdered_leaves_ID;
-      axios.put(api + `/update_powdered_leaves_data/${batchID}?powdered_id=${powderedId}`)
+      axios.put(api + `/update_powdered_leaves_data/${batchID}?powder_id=${powderedId}`)
       axios.put(api + `/update_order_status/${batchID}`, {status: 3})
       navigate(`/newbatch5/${batchID}`);
     };
@@ -31,8 +32,7 @@ const MCentraAddPowdered = () => {
       navigate('/');
     };
 
-  const [weight, setWeight] = useState('');
-  const [date, setDate] = useState();
+  
 
   return (
     <div className="NBAP_mcentra-add-powdered">

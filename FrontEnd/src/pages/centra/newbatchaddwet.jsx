@@ -1,53 +1,73 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/centra_styles/newbatch.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "./centraAPI";
+import dayjs from 'dayjs';
+import Cookies from 'js-cookie';
 
 const MCentraAddWet = () => {
   const navigate = useNavigate();
   const api = API();
 
   const [weight, setWeight] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(dayjs().format("YYYY-MM-DD"));
 
+  const [userData, setUserData] = useState('');
+  async function getUserData() {    
+    try{
+        const userId = Cookies.get('user_id');
+        const response = await axios.get(`http://localhost:8000/user/${userId}`);
+        const result = response.data
+        console.log(result)
+        return result;
+    } catch {
+        return 0;
+    }
+  }
+
+  useEffect(() => {
+    const initUserData = async() =>{
+      const newUserData = await getUserData()
+      setUserData(newUserData);
+    }
+    initUserData();
+  }, [])
   const handleNextClick = async () => {
     try {
       const batchInfo = {
-        batch_ID: 0,
-        batch_date: date || "2024-06-18T05:04:16.197Z",
-        dry_leaves_ID: 0,
-        wet_leaves_ID: 0,
-        powdered_leaves_ID: 0,
-        status: 1,
-        dry_leaves: {
-          dry_leaves_ID: 0,
-          dry_weight: 0,
-          dry_date: "2024-06-18T05:04:16.197Z",
-          dry_image: "string"
-        },
-        wet_leaves: {
-          wet_leaves_ID: 0,
-          wet_weight: 0,
-          wet_date: date || "2024-06-18T05:04:16.197Z",
-          wet_image: "string"
-        },
-        powdered_leaves: {
-          powdered_leaves_ID: 0,
-          powdered_weight: 0,
-          powdered_date: "2024-06-18T05:04:16.197Z",
-          powdered_image: "string"
+          "batch_ID": 0,
+          "batch_date": date,
+          "dry_leaves_ID": 0,
+          "wet_leaves_ID": 0,
+          "powdered_leaves_ID": 0,
+          "status": 1,
+          "dry_leaves": {
+            "dry_leaves_ID": 0,
+            "dry_weight": 0,
+            "dry_date": date,
+            "dry_image": "string"
+          },
+          "wet_leaves": {
+            "wet_leaves_ID": 0,
+            "wet_weight": 0,
+            "wet_date": date,
+            "wet_image": "string"
+          },
+          "powdered_leaves": {
+            "powdered_leaves_ID": 0,
+            "powdered_weight": 0,
+            "powdered_date": date,
+            "powdered_image": "string"
         }
       };
-
-      const response = await axios.post(api + '/set_batch_information', batchInfo);
-      const batchId = response.data.batch_ID;
-
-      const wetInfo = {
+      axios.post(api + '/set_batch_information?centra_user_id=' + userData.centra_user_ID, batchInfo).then(async(response) => {
+        const batchId = response.data;
+        const wetInfo = {
         wet_leaves_ID: 0,
-        wet_weight: weight || 0,
-        wet_date: date || "2024-06-18T05:04:16.197Z",
+        wet_weight: weight ? weight : 0,
+        wet_date: date,
         wet_image: "string"
       };
 
@@ -55,7 +75,8 @@ const MCentraAddWet = () => {
       const wetId = response2.data.wet_leaves_ID;
 
       await axios.put(api + `/update_wet_leaves_data/${batchId}?wet_id=${wetId}`);
-      
+      navigate(`/newbatch3/${batchId}`)
+      });
     } catch (error) {
       console.error("Error updating batch information:", error);
     }
@@ -65,6 +86,9 @@ const MCentraAddWet = () => {
     navigate('/');
   };
 
+  if(!userData){
+    return (<div>Loading</div>)
+  }
   return (
     <div className="NBAW_mcentra-add-wet">
       <div className="NBAW_new-batch">New Batch</div>
@@ -78,12 +102,12 @@ const MCentraAddWet = () => {
           onChange={(e) => setWeight(e.target.value)} 
         />
       </div>
-      <div className="NBAW_date">{"Date   "}
+      <div className="NBAD_date4">{"Date   "}
         <input 
-          type="date" 
-          value={date} 
-          onChange={(e) => setDate(e.target.value)} 
-        />
+              type="date" 
+              value={date} 
+              onChange={(e) => setDate(e.target.value)} 
+            />
       </div>
       <div className="NBAW_mcentra-add-wet-inner" />
       <div className="NBAW_mcentra-add-wet-item" />

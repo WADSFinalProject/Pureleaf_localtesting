@@ -144,7 +144,7 @@ async def get_user_info(user_id: str, request: Request, response: Response):
                 session_data = {}
                 if user_type_id == 2:
                     # Fetch centra information
-                    cursor.execute("SELECT centra_ID, user_id AS centra_user_ID FROM centra_user WHERE user_id = %s", (user_id,))
+                    cursor.execute("SELECT centra_ID, centra_user_ID FROM centra_user WHERE user_id = %s", (user_id,))
                     centra_user_info = cursor.fetchone()
                     if centra_user_info:
                         cursor.execute("SELECT centra_name, centra_address FROM centra_detail WHERE centra_ID = %s", (centra_user_info['centra_ID'],))

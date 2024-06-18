@@ -16,7 +16,6 @@ const MCentraNewBatchDetails = () => {
 
     useEffect(() => {
       const setBatch = async () => {
-        console.log(batchData);
         const response = await axios.get(api + '/get_order/' + batchID);
         const result = response.data;
         setBatchData(result);
@@ -35,7 +34,8 @@ const MCentraNewBatchDetails = () => {
           arrival_date: "2024-06-18T09:10:43.019Z",
           hg_user_ID: 0,
         };
-        date & harborID ? await axios.post(api + '/create_harbor_checkpoint', postData) : console.error("Error posting data:", error);
+        await axios.post(api + '/create_harbor_checkpoint', postData);
+        axios.put(api + `/update_order_status/${batchID}`, {status: 4})
         navigate('/newbatch6');
       } catch (error) {
         console.error("Error posting data:", error);
