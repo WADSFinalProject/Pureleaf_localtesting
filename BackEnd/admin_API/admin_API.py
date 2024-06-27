@@ -7,6 +7,7 @@ from fastapi.responses import JSONResponse
 from config import get_new_connection
 import mysql.connector
 from mysql.connector import Error
+from mangum import Mangum
 
 
 app = FastAPI()
@@ -235,18 +236,17 @@ def get_all_shipments():
     for row in shipments:
         formatted_row = {
             "checkpoint_ID": row["checkpoint_ID"],
-            "harbor_batch_rescale": row["harbor_batch_rescale"],
+            "harbor_batch_rescale": row["harbor_batch_rescale"] if row["harbor_batch_rescale"] is not None else 0.0,
             "sent_date": row["sent_date"],
             "arrival_date": row["arrival_date"],
             "transport_status": row["transport_status"],
             "batch_ID": row["batch_ID"],
-            "hg_user_ID": row["hg_user_ID"],
+            "hg_user_ID": row["hg_user_ID"] if row["hg_user_ID"] is not None else 0,
             "harbor_ID": row["harbor_ID"],
             "user_ID": row.get("user_ID") 
         }
         formatted_result.append(formatted_row)
     return formatted_result
-
 
 # Get 1 shipment information
 @app.get("/shipments/{shipment_id}", response_model=HarborCheckpoint)
@@ -316,4 +316,41 @@ def delete_batch(batch_id: int = Path(..., description="The ID of the batch orde
     except Error as err:
         connection.close()
         raise HTTPException(status_code=500, detail=str(err))
+    
+# Confirm a batch order
+@app.put("/confirmorder/{shipment_id}/{date}/{weight}")
+def confirm_order(shipment_id: int, weight: float, date: datetime):
+    conn = get_new_connection()
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor()
+    try:
+        # Update the harbor_checkpoint table
+        cursor.execute("UPDATE harbor_checkpoint SET transport_status = %s, arrival_date = %s, harbor_batch_rescale = %s WHERE checkpoint_ID = %s",
+                       (3, date, weight, shipment_id))
+        conn.commit()
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Shipment not found or status unchanged")
+        
+        # Get batch_ID from harbor_checkpoint table
+        cursor.execute("SELECT batch_ID FROM harbor_checkpoint WHERE checkpoint_ID = %s", (shipment_id,))
+        batch_id = cursor.fetchone()
+        if batch_id is None:
+            raise HTTPException(status_code=404, detail="Batch ID not found for the given shipment ID")
+        
+        # Update the batch_information table
+        cursor.execute("UPDATE batch_information SET status = %s WHERE batch_ID = %s",
+                       (3, batch_id[0]))
+        conn.commit()
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Batch information not found or status unchanged")
+
+        return {"message": "Shipment and batch status updated successfully"}
+    except Error as e:
+        print(f"Database error: {e}")
+        raise HTTPException(status_code=500, detail=f"Database update failed: {e}")
+    finally:
+        cursor.close()
+        conn.close()
     
