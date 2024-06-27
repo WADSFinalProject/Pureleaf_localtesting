@@ -22,3 +22,14 @@ Contains all the files of Pureleaf for local testing.
 1. Open command line in the frontend folder
 2. run ```npm install```
 3. After the package installation is finished, run ```npm run dev -- -p 5173``` 
+
+# Credentials
+- Centra
+  - Email => centra@gmail.com
+  - Password => centrapass
+- Harbor
+  - Email => harbor@gmail.com
+  - Password => harborpass
+- Admin
+  - Email => admin@gmail.com
+  - Password => adminpass
