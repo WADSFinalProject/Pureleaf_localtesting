@@ -1,0 +1,397 @@
+.admin_shiphist_h2,
+.admin_shiphist_shippingHistory {
+  margin: 0;
+  position: relative;
+  font-family: inherit;
+}
+.admin_shiphist_h2 {
+  font-size: inherit;
+  font-weight: 400;
+  display: inline-block;
+  min-width: 23px;
+}
+.admin_shiphist_shippingHistory {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+.admin_shiphist_frameChild,
+.admin_shiphist_frameParent,
+.admin_shiphist_parent {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+}
+.admin_shiphist_parent {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.admin_shiphist_frameChild,
+.admin_shiphist_frameParent {
+  justify-content: flex-start;
+  font-family: var(--font-inter);
+}
+.admin_shiphist_frameChild {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background-color: var(--sand);
+  height: 43px;
+  border-radius: var(--br-11xl);
+  flex-direction: row;
+  padding: var(--padding-xs) 28px;
+  box-sizing: border-box;
+  font-weight: 200;
+  font-size: var(--font-size-base);
+  color: var(--ash);
+  min-width: 192px;
+}
+.admin_shiphist_frameParent {
+  flex-direction: column;
+  padding: 0 0 var(--padding-3xs);
+  gap: 17px;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+}
+.admin_shiphist_mharborShippingHistoryChild {
+  width: 100%;
+  height: 78px;
+  position: absolute;
+  margin: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--ash);
+  z-index: 1;
+}
+.admin_shiphist_backgroundContainer {
+  align-self: stretch;
+  height: 132px;
+  position: relative;
+  border-radius: var(--br-11xl);
+  background: linear-gradient(rgba(0, 0, 0, 0.admin_2), rgba(0, 0, 0, 0.admin_2)), #848d4c;
+}
+.admin_shiphist_mharborShippingHistory {
+  width: 100%;
+  position: relative;
+  background-color: var(--glow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-46xl) var(--padding-16xl) var(--padding-7xs);
+  box-sizing: border-box;
+  gap: var(--gap-9xl);
+  line-height: normal;
+  letter-spacing: normal;
+}
+.admin_shiphist_backButton {
+  text-decoration: none; 
+}
+
+
+.admin_s_head_filterBy1 {
+    position: relative;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 68px;
+  }
+  .admin_s_head_batchesChild {
+    height: 132px;
+    width: 320px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: none;
+    z-index: 0;
+  }
+  .admin_s_head_batchId {
+    position: relative;
+    display: inline-block;
+    min-width: 58px;
+    z-index: 1;
+  }
+  .admin_s_head_quickRelevantInfo {
+    align-self: stretch;
+    position: relative;
+    font-weight: 300;
+    color: var(--sand);
+    z-index: 1;
+  }
+  .admin_s_head_batchIdParent {
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-mini);
+  }
+  .admin_s_head_frameChild {
+    height: 22px;
+    width: 22px;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--sand);
+    z-index: 1;
+  }
+  .admin_s_head_frameItem {
+    align-self: stretch;
+    height: 1px;
+    position: relative;
+    border-top: 1px solid var(--sand);
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  .admin_s_head_lineWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 0 var(--padding-3xs);
+  }
+  .admin_s_head_frameInner {
+    height: 22px;
+    width: 22px;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--sand);
+    z-index: 1;
+  }
+  .admin_s_head_ellipseParent,
+  .admin_s_head_quickInfoLabelInner {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .admin_s_head_ellipseParent {
+    flex: 1;
+    align-items: flex-end;
+  }
+  .admin_s_head_quickInfoLabelInner {
+    align-self: stretch;
+    align-items: flex-start;
+    padding: 0 var(--padding-10xs) 0 var(--padding-12xs);
+  }
+  .admin_s_head_finishOnDate {
+    width: 222px;
+    align-self: stretch;
+    position: relative;
+    font-weight: 200;
+    z-index: 1;
+  }
+  .admin_s_head_quickInfoLabel,
+  .admin_s_head_quickInfoLabel1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .admin_s_head_quickInfoLabel1 {
+    align-self: stretch;
+    gap: var(--gap-20xl);
+  }
+  .admin_s_head_quickInfoLabel {
+    width: 131px;
+    padding: var(--padding-11xs) 0 0;
+    box-sizing: border-box;
+    text-align: right;
+    color: var(--sand);
+  }
+  .admin_s_head_shape {
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    margin: 0 !important;
+    top: 27px;
+    right: 82px;
+    border-radius: 50%;
+    background-color: var(--earth);
+    z-index: 3;
+  }
+  .admin_s_head_batches,
+  .admin_s_head_filterBy {
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+  }
+  .admin_s_head_batches {
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--padding-6xl) var(--padding-8xl) var(--padding-5xl)
+      var(--padding-16xl);
+    position: relative;
+    gap: var(--gap-xl);
+    font-size: var(--font-size-sm);
+    color: var(--glow);
+  }
+  .admin_s_head_filterBy {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--gap-mini);
+    text-align: left;
+    font-size: var(--font-size-base);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+  }
+  
+  .admin_s_body_rectangleParent {
+    align-self: stretch;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-4xl) var(--padding-8xl);
+    position: relative;
+    gap: var(--gap-mini);
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--sand);
+    font-family: var(--font-inter);
+  }
+
+  .admin_s_contain_frameChild {
+    height: 132px;
+    width: 320px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: none;
+    z-index: 0;
+  }
+  .admin_s_contain_batchId {
+    position: relative;
+    display: inline-block;
+    min-width: 58px;
+    z-index: 1;
+  }
+  .admin_s_contain_quickRelevantInfo {
+    align-self: stretch;
+    position: relative;
+    font-weight: 300;
+    color: var(--sand);
+    z-index: 1;
+  }
+  .admin_s_contain_batchIdParent {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-mini);
+  }
+  .admin_s_contain_frameInner {
+    align-self: stretch;
+    height: 1px;
+    position: relative;
+    border-top: 1px solid var(--sand);
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  .admin_s_contain_lineWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 0 var(--padding-3xs);
+  }
+  .admin_s_contain_ellipseParent,
+  .admin_s_contain_frameContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .admin_s_contain_ellipseParent {
+    flex: 1;
+    align-items: flex-end;
+  }
+  .admin_s_contain_frameContainer {
+    align-self: stretch;
+    align-items: flex-start;
+    padding: 0 var(--padding-10xs) 0 var(--padding-12xs);
+  }
+  .admin_s_contain_finishOnDate {
+    align-self: stretch;
+    position: relative;
+    font-weight: 200;
+    z-index: 1;
+  }
+  .admin_s_contain_frameParent,
+  .admin_s_contain_frameWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .admin_s_contain_frameParent {
+    align-self: stretch;
+    gap: var(--gap-20xl);
+  }
+  .admin_s_contain_frameWrapper {
+    width: 200px;
+    padding: var(--padding-11xs) 0 0;
+    box-sizing: border-box;
+    text-align: right;
+    color: var(--sand);
+  }
+  .admin_s_dotsContainer {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 200px;
+  }
+
+  .admin_s_dotsContainer::before {
+      content: "";
+      position: absolute;
+      top: 50%; /* Adjusted left position to center the line */
+      left: calc(10%);
+      right: calc(0%);
+      height: 1px; /* Adjust thickness of the line */
+      background-color: #000; /* Adjust color of the line */
+      z-index: 2; /* Ensure the line is above the dots */
+      transform: translateY(-50%); /* Center the line vertically */
+  }
+
+  .admin_s_frameInner {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--sand);
+      z-index: 3;
+  }
+
+  /* Adjust individual positions as needed */
+  .admin_s_frameInner:nth-child(1) {
+    margin-left: calc((100% - (22px * 6)) / 5); /* Calculates margin between dots */
+  }
+
+  .admin_s_frameInner:nth-child(6) {
+    margin-right: 0; /* No margin on the right for the last dot */
+  }
+  .admin_s_contain_rectangleParent {
+    align-self: stretch;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--padding-6xl) var(--padding-8xl) var(--padding-5xl)
+      var(--padding-16xl);
+    position: relative;
+    gap: var(--gap-xl);
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--glow);
+    font-family: var(--font-inter);
+  }
+  

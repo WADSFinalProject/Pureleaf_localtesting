@@ -1,0 +1,257 @@
+body {
+    background-color: var(--glow);
+  }
+
+.admin_mainBackgroundRect {
+    width: 100%;
+    height: 78px;
+    position: absolute;
+    margin: 0 !important;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--ash);
+    z-index: 1;
+  }
+  .admin_subBackgroundRect {
+    align-self: stretch;
+    height: 132px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background: linear-gradient(rgba(0, 0, 0, 0.admin_2), rgba(0, 0, 0, 0.admin_2)), #848d4c;
+  }
+  .admin_mainOngoingShipment {
+    width: 100%;
+    position: relative;
+    background-color: var(--glow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-46xl) var(--padding-16xl) var(--padding-7xs);
+    box-sizing: border-box;
+    gap: var(--gap-9xl);
+    line-height: normal;
+    letter-spacing: normal;
+  }
+
+
+/*ongoing header */
+
+  .admin_osh_h2,
+.admin_osh_ongoingShipment {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-family: inherit;
+}
+.admin_osh_h2 {
+  font-weight: 400;
+  display: inline-block;
+  min-width: 23px;
+}
+.admin_osh_ongoingShipment {
+  font-weight: 600;
+  
+}
+.admin_osh_ongoingShipmentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-9xs) 0 0;
+  font-size: var(--font-size-xl);
+}
+.admin_osh_frameChild,
+.admin_osh_frameParent,
+.admin_osh_parent {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+}
+.admin_osh_parent {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--gap-xl);
+}
+.admin_osh_frameChild,
+.admin_osh_frameParent {
+  justify-content: flex-start;
+  font-family: var(--font-inter);
+}
+.admin_osh_frameChild {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background-color: var(--sand);
+  height: 43px;
+  border-radius: var(--br-11xl);
+  flex-direction: row;
+  padding: var(--padding-xs) var(--padding-15xl);
+  box-sizing: border-box;
+  font-weight: 200;
+  font-size: var(--font-size-base);
+  color: var(--ash);
+  min-width: 192px;
+}
+.admin_osh_frameParent {
+  flex-direction: column;
+  padding: 0 0 var(--padding-8xs);
+  gap: var(--gap-3xl);
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: var(--color-black);
+}
+.admin_osh_backButton {
+  text-decoration: none;
+}
+
+/* container */
+
+.admin_osd_frameChild {
+    width: 320px;
+    height: 132px;
+    position: relative;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: none;
+    z-index: 0;
+  }
+  .admin_osd_shippingIdexample {
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+  }
+  .admin_osd_sentOnDateLabelChild {
+    align-self: stretch;
+    height: 1px;
+    position: relative;
+    background-color: var(--sand);
+    border-top: 1px solid var(--sand);
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  .admin_osd_sentOnDateLabel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 0 var(--padding-3xs);
+  }
+  .admin_osd_frameItem1 {
+    height: 22px;
+    width: 22px;
+    position: relative;
+    border-radius: 50%;
+    background-color: var(--sand);
+    margin-right: 10px;
+    z-index: 1;
+  }
+  .admin_osd_sentOnDateLabelParent {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  .admin_osd_ongoingShipmentLabel {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 var(--padding-mid) 0 0;
+  }
+  .admin_osd_sentOnDate {
+    width: 222px;
+    position: relative;
+    display: inline-block;
+    font-weight: 300;
+    z-index: 1;
+  }
+  .admin_osd_ongoingShipmentLabelParent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: var(--gap-mini);
+    min-width: 147px;
+  }
+  .admin_osd_fRAME,
+  .admin_osd_shippingIDLabelParent {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .admin_osd_shippingIDLabelParent {
+    flex: 1;
+    flex-wrap: wrap;
+    row-gap: 20px;
+  }
+  .admin_osd_fRAME {
+    align-self: stretch;
+    padding: 0 0 0 var(--padding-lg);
+    text-align: right;
+  }
+
+  .admin_osd_dotsContainer {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+  }
+
+  .admin_osd_dotsContainer::before {
+      content: "";
+      position: absolute;
+      top: 50%; /* Adjusted left position to center the line */
+      left: calc(20%);
+      right: calc(0%);
+      height: 1px; /* Adjust thickness of the line */
+      background-color: #000; /* Adjust color of the line */
+      z-index: 2; /* Ensure the line is above the dots */
+      transform: translateY(-50%); /* Center the line vertically */
+  }
+
+  .admin_osd_frameInner {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: var(--sand);
+      z-index: 3;
+  }
+
+
+  /* Adjust individual positions as needed */
+  .admin_osd_frameInner:nth-child(1) {
+    margin-left: calc((100% - (22px * 6)) / 5); /* Calculates margin between dots */
+  }
+
+  .admin_osd_frameInner:nth-child(6) {
+    margin-right: 0; /* No margin on the right for the last dot */
+  }
+
+  .admin_osd_rectangleParent {
+    align-self: stretch;
+    border-radius: var(--br-11xl);
+    background-color: var(--matcha);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-4xl) var(--padding-8xl);
+    position: relative;
+    gap: var(--gap-mini);
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--sand);
+    font-family: var(--font-inter);
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  

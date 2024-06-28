@@ -1,0 +1,135 @@
+body{
+  background-color: var(--glow);  
+}
+
+.admin-mobile-confirm {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  max-width: 500px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-mobile-confirm-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-mobile-confirm-header h2, .admin-mobile-confirm-header div {
+  color: #000000;
+}
+
+.batch-edit-admin-mobile-confirm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #152E1C;
+  border-radius: 20px;
+  height: 90%;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.detail-form-admin-mobile-confirm {
+  width: 80%;
+  display: flex;
+  margin-top: 5%;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.detail-form-admin-mobile-confirm h2, .detail-form-admin-mobile-confirm h3, .detail-form-admin-mobile-confirm span {
+  text-align: left;
+  /* color: #FBF9EC; */
+}
+.image-upload-admin-mobile-confirm-container {
+  margin-top: 20px;
+}
+.image-upload-admin-mobile-confirm-container h3 {
+  text-align: left;
+  color: #FBF9EC;
+}
+
+.detail-form-admin-mobile-confirm input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  flex-grow: 1;
+  width: 90%;
+  background-color: #DFD8C2; /* Light beige color */
+  border-radius: 50px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 5%;
+  padding-right: 5%;
+  color: #555;
+}
+
+.detail-form-admin-mobile-confirm textarea {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: Helvetica, Arial, sans-serif;
+  flex-grow: 1;
+  width: 90%;
+  background-color: #DFD8C2; /* Light beige color */
+  border-radius: 20px;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  padding-left: 5%;
+  padding-right: 5%;
+  color: #555;
+  resize: none;
+}
+
+.detail-form-admin-mobile-confirm input ::placeholder{
+  color: #555;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  opacity: 0.6;
+  filter: invert(0.8);
+}
+
+.image-upload-admin-mobile-confirm {
+  background-color: #555;
+  width: 380px;
+  height: 300px;
+  margin-top: 30px;
+  border-radius: 20px;
+}
+
+.batch-buttons-admin-mobile-confirm {
+  width: 380px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.batch-btn-admin-mobile-confirm {
+  padding: 10px;
+  background-color: #DFD8C2;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+.back-btn{
+  text-decoration: none;
+  font-family: var(--font-inter);
+}
+

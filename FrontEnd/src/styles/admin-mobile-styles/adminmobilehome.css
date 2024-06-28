@@ -1,0 +1,203 @@
+.admin-mobile-home-container {
+  max-width: 500px;
+  padding: 2rem;
+  width: 80%;
+  margin: auto;
+}
+
+.user-detail-admin-mobile {
+  margin: 10px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: left;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  width: calc(100%-15px);
+}
+
+.profile-picture-admin-mobile {
+  min-width: 70px;
+  height: 70px;
+  background-color: gray;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-details-admin-mobile {
+  margin-left: 30px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: #000000;
+}
+
+.profile-name-admin-mobile {
+  font-weight: bold;
+  text-align: left;
+  font-size: 18pt;
+}
+
+.profile-location-admin-mobile {
+  color: #000000;
+  text-align: left;
+  font-size: 12pt;
+}
+
+.search-admin-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: Arial, sans-serif;
+  margin-bottom: 2rem;
+  margin: 10px;
+  width: calc(100% - 10px);
+}
+
+.search-admin-mobile label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+.search-container-admin-mobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.input-container-admin-mobile {
+  display: flex;
+  align-items: center;
+  background-color: #DFD8C2; /* Light beige color */
+  border-radius: 50px;
+  padding: 0.5rem;
+  width: 75%;
+}
+
+.input-container-admin-mobile input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 50px 0 0 50px;
+  flex-grow: 1;
+}
+
+.input-container-admin-mobile button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 50px 50px 0;
+}
+
+.search-btn-admin-mobile {
+  display: flex;
+  align-items: center;
+  background-color: #DFD8C2; /* Light beige color */
+  border-radius: 50px;
+  padding: 0.5rem;
+  width: 12%;
+}
+
+.feature-container-admin-mobile {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.features-admin-mobile {
+  display: flex;
+  flex-direction: column; /* Change to column to stack the items vertically */
+  width: 100%;
+}
+
+.feature-admin-mobile {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #938D6B;
+  height: 150px; /* Increase the height */
+  width: 95%; /* Set width to 100% to fill the available space */
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recents-admin-mobile {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: calc(100% - 10px);;
+}
+
+.recents-label-admin-mobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.batch-display-home-admin-mobile {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  height: 150px;
+  background-color: #DFD8C2;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.batch-details-admin-mobile {
+  flex: 1;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  align-items: flex-start;
+}
+
+.batch-details-admin-mobile h2 {
+  text-align: left;
+  color: #000000;
+  font-size: 12pt;
+  margin-top: 0;
+}
+
+.batch-details-admin-mobile h3 {
+  text-align: left;
+  color: #000000;
+  font-size: 8pt;
+  margin: 0;
+}
+
+.batch-details-admin-mobile p {
+  text-align: left;
+  color: #000000;
+  font-size: 10pt;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.batch-display-color-admin-mobile {
+  flex: 1;
+  background-color: #6a4c42; /* Dark brown color */
+}
+
+.logout-button {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
